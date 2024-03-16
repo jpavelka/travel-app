@@ -131,7 +131,7 @@
       for (let i in tripData) {
         i = parseInt(i);
         const d = tripData[i];
-        let opts = {};
+        let opts = { icon: blueIcon };
         if (currentInd === i || d.date - today === 0) {
           opts = { icon: goldIcon };
         } else if (d.date < today) {
