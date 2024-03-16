@@ -32,6 +32,12 @@
   }
   $: innerWidth = 0;
   const smallWidth = 700;
+  const hiddenId = "weatherLineDetail" + weatherData.startTime;
+  const lineClickFunc = () => {
+    const el = document.getElementById(hiddenId);
+    console.log(el.style.display === "none");
+    el.style.display = el.style.display === "none" ? "block" : "none";
+  };
 </script>
 
 <svelte:window bind:innerWidth />
@@ -41,34 +47,42 @@
   </div>
 {/if}
 <div class="dayWeatherLine">
-  <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="dayTime">
-    {dayTime}
-  </div>
-  <img
-    style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}"
-    class="weatherIcon"
-    src={iconSrc}
-    alt="iconSrc"
-  />
-  <div class="vertLine"></div>
-  <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="temp">
-    {weatherData.temperature}&deg;
-  </div>
-  <div class="vertLine"></div>
-  <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="precip">
-    <img src={icons.rain} alt={"precip"} />
-    {precipChance}%
-  </div>
-  <div class="vertLine"></div>
-  <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="wind">
-    <img src={icons.wind} alt="wind" />
-    {weatherData.windDirection}
-    {weatherData.windSpeed.replace(" to ", "-")}
-  </div>
-  {#if innerWidth >= smallWidth}
+  <a role="div" class="weatherLine1" on:click={lineClickFunc}>
+    <div
+      style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}"
+      class="dayTime"
+    >
+      {dayTime}
+    </div>
+    <img
+      style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}"
+      class="weatherIcon"
+      src={iconSrc}
+      alt="iconSrc"
+    />
     <div class="vertLine"></div>
-    <div class="fcst">{shortFcst}</div>
-  {/if}
+    <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="temp">
+      {weatherData.temperature}&deg;
+    </div>
+    <div class="vertLine"></div>
+    <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="precip">
+      <img src={icons.rain} alt={"precip"} />
+      {precipChance}%
+    </div>
+    <div class="vertLine"></div>
+    <div style="flex-shrink: {innerWidth <= smallWidth ? 1 : 0}" class="wind">
+      <img src={icons.wind} alt="wind" />
+      {weatherData.windDirection}
+      {weatherData.windSpeed.replace(" to ", "-")}
+    </div>
+    {#if innerWidth >= smallWidth}
+      <div class="vertLine"></div>
+      <div class="fcst">{shortFcst}</div>
+    {/if}
+  </a>
+  <div class="dtlFcst" id={hiddenId}>
+    {weatherData.detailedForecast}
+  </div>
 </div>
 
 <style>
@@ -85,6 +99,8 @@
   .dayWeatherLine {
     border: 1pt solid gray;
     padding: 3pt;
+  }
+  .weatherLine1 {
     display: flex;
     align-items: center;
     height: 50px;
@@ -127,5 +143,13 @@
     font-size: 1.1rem;
     padding: 0 5pt;
     overflow: hidden;
+  }
+  .dtlFcst {
+    display: none;
+    padding: 4pt;
+    padding-left: 10pt;
+    font-size: 1.1rem;
+    border-top: 1pt solid #ddd;
+    margin-top: 4pt;
   }
 </style>
