@@ -1,5 +1,6 @@
 <script>
 	import LeafletMap from '$lib/LeafletMap.svelte';
+    import Weather from '../lib/Weather.svelte';
 </script>
 
 <main>
@@ -8,4 +9,5 @@
         <LeafletMap />
     </div>
     <h1>Weather</h1>
+        <Weather />
 </main>
