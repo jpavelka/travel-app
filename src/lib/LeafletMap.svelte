@@ -4,7 +4,7 @@
   import { tripData, getDateData } from "$lib/getTripData.js";
 
   const currentInd = getDateData().dataInd;
-  const today = new Date((new Date()).toDateString());
+  const today = new Date(new Date().toDateString());
   let mapElement;
   let map;
   const quickDateFormat = (d) => {
@@ -23,7 +23,6 @@
           '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      
       const blueIcon = new L.Icon({
         iconUrl:
           "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
@@ -64,9 +63,12 @@
         } else if (d.date < today) {
           opts = { icon: grayIcon };
         }
-        const txtMrk = L.marker([d.lat, d.lng], {opacity: 0})
-        txtMrk.bindTooltip(d.date.toLocaleDateString().split('/').slice(0, 2).join('/'), {permanent: true, className: "date-label", offset: [1, 0] })
-        txtMrk.addTo(map)
+        const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
+        txtMrk.bindTooltip(
+          d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
+          { permanent: true, className: "date-label", offset: [1, 0] }
+        );
+        txtMrk.addTo(map);
         const mrk = L.marker([d.lat, d.lng], opts);
         mrk.bindPopup(
           [
@@ -106,12 +108,12 @@
           );
           clickLine.bindPopup(
             [
-              '<b>Driving</b>',
+              "<b>Driving</b>",
               quickDateFormat(d.date),
               `From: ${lastD.campground} (${lastD.city})`,
               `To: ${d.campground} (${d.city})`,
               `Distance: ${d.miles} miles`,
-              `Map: <a href='https://www.google.com/maps/dir/${lastD.lat},${lastD.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`
+              `Map: <a href='https://www.google.com/maps/dir/${lastD.lat},${lastD.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`,
             ].join("<br>")
           );
           clickLine.addTo(map);
@@ -131,20 +133,22 @@
   });
 
   const buttonClick = () => {
-    for (const el of document.getElementsByClassName('date-label')){
-        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    for (const el of document.getElementsByClassName("date-label")) {
+      el.style.display = el.style.display === "none" ? "block" : "none";
     }
-  }
+  };
 </script>
 
 <main>
   <div bind:this={mapElement}></div>
-  <button style='padding: 5pt; margin-top: 5pt' on:click={buttonClick}>Toggle Dates</button>
+  <button style="padding: 5pt; margin-top: 5pt" on:click={buttonClick}
+    >Toggle Dates</button
+  >
 </main>
 
 <style>
   @import "leaflet/dist/leaflet.css";
   main div {
-    height: 50vh;
+    height: 80vh;
   }
 </style>
