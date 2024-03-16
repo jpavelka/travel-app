@@ -1,10 +1,8 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
-  import { getTripData, getDateData } from "$lib/getTripData.js";
+  import { tripData, getDateData } from "$lib/getTripData.js";
 
-  const tripData = getTripData();
-  
   const currentInd = getDateData().dataInd;
   const today = new Date((new Date()).toDateString());
   let mapElement;
@@ -57,9 +55,9 @@
         shadowSize: [41, 41],
       });
 
-      for (let i in tripData) {
+      for (let i in $tripData) {
         i = parseInt(i);
-        const d = tripData[i];
+        const d = $tripData[i];
         let opts = { icon: blueIcon };
         if (currentInd === i || d.date - today === 0) {
           opts = { icon: goldIcon };
@@ -89,7 +87,7 @@
           allPoints.push(L.marker([d.lat + 1.5, d.lng]));
         }
         if (i !== 0) {
-          const lastD = tripData[i - 1];
+          const lastD = $tripData[i - 1];
           const color = d.date < today ? "#bbb" : "#4986E7";
           const line = L.polyline(
             [

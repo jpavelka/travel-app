@@ -19,7 +19,6 @@
   let iconSrc = weatherData.isDaytime ? icons.sunny : icons.clearNight;
   const shortFcst = weatherData.shortForecast;
   if (shortFcst.toLowerCase().includes("cloudy")) {
-    console.log(shortFcst);
     if (weatherData.isDaytime && shortFcst.toLowerCase().includes("partly")) {
       iconSrc = icons.partlyCloudy;
     } else {
@@ -35,8 +34,9 @@
   const hiddenId = "weatherLineDetail" + weatherData.startTime;
   const lineClickFunc = () => {
     const el = document.getElementById(hiddenId);
-    console.log(el.style.display === "none");
-    el.style.display = el.style.display === "none" ? "block" : "none";
+    el.style.display = ["none", ""].includes(el.style.display)
+      ? "block"
+      : "none";
   };
 </script>
 
