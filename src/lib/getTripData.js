@@ -1,4 +1,4 @@
-import { readable, get } from "svelte/store";
+import { readable, writable, get } from "svelte/store";
 import dayjs from "dayjs";
 
 const getTripData = () => {
@@ -86,6 +86,8 @@ const getDateData = (d) => {
   return get(tripData)[currentInd];
 };
 
+const tripWeatherData = writable([]);
+
 const getWeatherData = async () => {
   const today = dayjs(new Date());
   let loopDay = dayjs(new Date());
@@ -133,9 +135,9 @@ const getWeatherData = async () => {
       allDateInfo[i].isNewLocation = true;
     }
   }
-  return allDateInfo;
+  tripWeatherData.set(allDateInfo);
 };
 
-const tripWeatherData = readable(await getWeatherData());
+getWeatherData();
 
 export { tripData, getDateData, tripWeatherData };
