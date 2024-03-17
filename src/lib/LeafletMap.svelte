@@ -3,7 +3,8 @@
   import { browser } from "$app/environment";
   import { tripData, getDateData } from "$lib/getTripData.js";
 
-  const currentInd = getDateData().dataInd;
+  const dateData = getDateData();
+  const currentInd = dateData[dateData.length - 1].dataInd;
   const today = new Date(new Date().toDateString());
   let mapElement;
   let map;

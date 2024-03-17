@@ -5,10 +5,12 @@
   import { browser } from "$app/environment";
   let whichToShowInit = "map";
   if (browser) {
-    whichToShowInit = localStorage.getItem("tab");
+    const ls = localStorage.getItem("tab");
+    if (!!ls && ls !== "") {
+      whichToShowInit = ls;
+    }
   }
   $: whichToShow = whichToShowInit;
-  // whichToShow = "weather";
   const tabClick = (x) => {
     whichToShow = x;
     if (browser) {
@@ -45,7 +47,7 @@
       <Weather />
     {/if}
   {:else}
-    Loading...
+    Loading page data...
   {/if}
 </main>
 

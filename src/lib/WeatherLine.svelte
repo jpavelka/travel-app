@@ -2,10 +2,12 @@
   import dayjs from "dayjs";
   export let weatherData;
   const dayTime =
-    weatherData.name === "Overnight"
-      ? "Overnight"
-      : dayjs(weatherData.startTime).format("ddd M/D") +
-        ` (${weatherData.isDaytime ? "day" : "night"})`;
+    weatherData.name === "Now"
+      ? "Now"
+      : weatherData.name === "Overnight"
+        ? "Overnight"
+        : dayjs(weatherData.startTime).format("ddd M/D") +
+          ` (${weatherData.isDaytime ? "day" : "night"})`;
   const icons = {
     sunny: "https://img.icons8.com/?size=48&id=15352&format=png",
     cloudy: "https://img.icons8.com/?size=48&id=11871&format=png",
