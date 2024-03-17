@@ -4,7 +4,7 @@
   $: wait = true;
   setTimeout(() => {
     wait = false;
-  }, 2000);
+  }, 3000);
 </script>
 
 {#if $tripWeatherData.length === 0}

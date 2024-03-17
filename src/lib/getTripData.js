@@ -104,24 +104,28 @@ const getWeatherData = async () => {
   const getWeatherData = async (lat, lng, dt) => {
     dt = new Date(dt);
     let nowData = [];
-    const response = await fetch(
-      `https://api.weather.gov/points/${lat},${lng}`
-    );
-    const myJson = await response.json();
-    if (dt.toDateString() == new Date(today).toDateString()) {
-      const hourlyResponse = await fetch(myJson.properties.forecastHourly);
-      const hourlyJson = await hourlyResponse.json();
-      const periods = hourlyJson.properties.periods;
-      periods[0].name = "Now";
-      nowData = [periods[0]];
+    try {
+      const response = await fetch(
+        `https://api.weather.gov/points/${lat},${lng}`
+      );
+      const myJson = await response.json();
+      if (dt.toDateString() == new Date(today).toDateString()) {
+        const hourlyResponse = await fetch(myJson.properties.forecastHourly);
+        const hourlyJson = await hourlyResponse.json();
+        const periods = hourlyJson.properties.periods;
+        periods[0].name = "Now";
+        nowData = [periods[0]];
+      }
+      const forecastResponse = await fetch(myJson.properties.forecast);
+      const forecastJson = await forecastResponse.json();
+      const periods = forecastJson.properties.periods;
+      const filtered = periods.filter(
+        (p) => new Date(p.startTime).toDateString() == dt.toDateString()
+      );
+      return nowData.concat(filtered);
+    } catch {
+      return []
     }
-    const forecastResponse = await fetch(myJson.properties.forecast);
-    const forecastJson = await forecastResponse.json();
-    const periods = forecastJson.properties.periods;
-    const filtered = periods.filter(
-      (p) => new Date(p.startTime).toDateString() == dt.toDateString()
-    );
-    return nowData.concat(filtered);
   };
 
   while (loopDay < today.add(7, "day")) {

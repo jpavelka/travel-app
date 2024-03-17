@@ -28,7 +28,7 @@
     }
   }
   const precipChance = weatherData.probabilityOfPrecipitation.value || 1;
-  if (precipChance > 35) {
+  if (precipChance > 50) {
     iconSrc = icons.rain;
   }
   $: innerWidth = 0;
@@ -42,7 +42,8 @@
 <svelte:window bind:innerWidth />
 {#if weatherData.isNewLocation}
   <div class="loc">
-    {weatherData.travelData.campground} ({weatherData.travelData.city})
+    {weatherData.travelData.campground}
+    <span style="font-size: 1.3rem">({weatherData.travelData.city})</span>
   </div>
 {/if}
 <div class="dayWeatherLine">
@@ -79,7 +80,7 @@
       <div class="fcst">{shortFcst}</div>
     {/if}
   </a>
-  <div class="dtlFcst" style={`display: ${showDtlFcst ? 'block' : 'none'}`}>
+  <div class="dtlFcst" style={`display: ${showDtlFcst ? "block" : "none"}`}>
     {weatherData.detailedForecast}
   </div>
 </div>
