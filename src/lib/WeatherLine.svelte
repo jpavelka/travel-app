@@ -33,12 +33,9 @@
   }
   $: innerWidth = 0;
   const smallWidth = 700;
-  const hiddenId = "weatherLineDetail" + weatherData.startTime;
+  $: showDtlFcst = false;
   const lineClickFunc = () => {
-    const el = document.getElementById(hiddenId);
-    el.style.display = ["none", ""].includes(el.style.display)
-      ? "block"
-      : "none";
+    showDtlFcst = !showDtlFcst;
   };
 </script>
 
@@ -82,7 +79,7 @@
       <div class="fcst">{shortFcst}</div>
     {/if}
   </a>
-  <div class="dtlFcst" id={hiddenId}>
+  <div class="dtlFcst" style={`display: ${showDtlFcst ? 'block' : 'none'}`}>
     {weatherData.detailedForecast}
   </div>
 </div>
