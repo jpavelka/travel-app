@@ -2,10 +2,16 @@
   import LeafletMap from "$lib/LeafletMap.svelte";
   import Weather from "../lib/Weather.svelte";
   import WeatherWarning from "../lib/WeatherWarning.svelte";
-  import { tripWeatherData } from "$lib/getTripData";
+  import { browser } from "$app/environment"
   $: whichToShow = "map";
+  if (browser) {
+    whichToShow = localStorage.getItem("tab");
+  }
   const tabClick = (x) => {
     whichToShow = x;
+    if (browser) {
+      localStorage.setItem("tab", x);
+    }
   };
 </script>
 
