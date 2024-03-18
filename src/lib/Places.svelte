@@ -60,12 +60,13 @@
   {dt.add(placeData.nights, "days").format(dtFrmt)}
   {` (${placeData.nights} night${placeData.nights === 1 ? "" : "s"})`}
 </div>
-<div style="font-size:1.1rem">
+<div style="font-size:1.2rem">
   <span
     class={$placesInd > 0 ? "quickLink" : "quickLinkInactive"}
     on:click={() => {
       if ($placesInd > 0) {
         placesInd.update((x) => x - 1);
+        mapType = 'loc';
       }
     }}
   >
@@ -76,6 +77,7 @@
     class="quickLink"
     on:click={() => {
       placesInd.update((x) => getDateData()[0].dataInd);
+      mapType = 'loc';
     }}
   >
     Today
@@ -88,21 +90,28 @@
     on:click={() => {
       if ($placesInd < $tripData.length - 1) {
         placesInd.update((x) => x + 1);
+        mapType = 'loc';
       }
     }}
   >
     Next
   </span>
 </div>
-<div style="font-size:1.4rem;font-weight:bold;margin-top:8pt">Map</div>
-<div style="font-size:1.1rem;">
-  <span class="quickLink" on:click={() => (mapType = "loc")}>Location</span>
-  {#if $placesInd > 0}
-    - <span class="quickLink" on:click={() => (mapType = "fromLast")}>From Last</span>
-  {/if}
-  {#if $placesInd < $tripData.length - 1}
-    - <span class="quickLink" on:click={() => (mapType = "toNext")}>To Next</span>
-  {/if}
+<div style="font-size:1.5rem;font-weight:bold;margin-top:12pt">Map
+  <span>
+  <select bind:value={mapType} style="height:2rem;margin-bottom:5pt;font-size:1.1rem">
+    <option class="mapOption" value="loc">Location</option>
+    {#if $placesInd > 0}
+    <option class="mapOption" value="fromLast">Directions From Last</option>
+    {/if}
+    {#if $placesInd < $tripData.length - 1}
+    <option class="mapOption" value="toNext">Directions To Next</option>
+    {/if}
+  </select>
+  </span>
+</div>
+<div style="font-size:1.2rem;">
+  
 </div>
 <div style="height:40vh;min-height:200px">
   <iframe
@@ -133,5 +142,8 @@
   }
   .quickLinkInactive {
     color: gray;
+  }
+  .mapOption {
+    font-size: 1.2rem
   }
 </style>
