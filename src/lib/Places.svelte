@@ -62,7 +62,7 @@
 </div>
 <div style="font-size:1.1rem">
   <span
-    style={$placesInd > 0 ? "color:blue;cursor:pointer" : "color:gray"}
+    class={$placesInd > 0 ? "quickLink" : "quickLinkInactive"}
     on:click={() => {
       if ($placesInd > 0) {
         placesInd.update((x) => x - 1);
@@ -73,7 +73,7 @@
   </span>
   -
   <span
-    style="color:blue;cursor:pointer"
+    class="quickLink"
     on:click={() => {
       placesInd.update((x) => getDateData()[0].dataInd);
     }}
@@ -82,9 +82,9 @@
   </span>
   -
   <span
-    style={$placesInd < $tripData.length - 1
-      ? "color:blue;cursor:pointer"
-      : "color:gray"}
+    class={$placesInd < $tripData.length - 1
+      ? "quickLink"
+      : "quickLinkInactive"}
     on:click={() => {
       if ($placesInd < $tripData.length - 1) {
         placesInd.update((x) => x + 1);
@@ -95,13 +95,13 @@
   </span>
 </div>
 <div style="font-size:1.4rem;font-weight:bold;margin-top:8pt">Map</div>
-<div style="font-size:1.1rem;color:blue">
-  <span on:click={() => (mapType = "loc")}>Location</span>
+<div style="font-size:1.1rem;">
+  <span class="quickLink" on:click={() => (mapType = "loc")}>Location</span>
   {#if $placesInd > 0}
-    - <span on:click={() => (mapType = "fromLast")}>From Last</span>
+    - <span class="quickLink" on:click={() => (mapType = "fromLast")}>From Last</span>
   {/if}
   {#if $placesInd < $tripData.length - 1}
-    - <span on:click={() => (mapType = "toNext")}>To Next</span>
+    - <span class="quickLink" on:click={() => (mapType = "toNext")}>To Next</span>
   {/if}
 </div>
 <div style="height:40vh;min-height:200px">
@@ -125,3 +125,13 @@
     <div>Showers: {placeData.showers} ({utilsStr.showers})</div>
   </div>
 </div>
+
+<style>
+  .quickLink {
+    color: blue;
+    cursor: pointer;
+  }
+  .quickLinkInactive {
+    color: gray;
+  }
+</style>
