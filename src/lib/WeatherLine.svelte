@@ -81,7 +81,7 @@
     {/if}
   </a>
   <div class="dtlFcst" style={`display: ${showDtlFcst ? "block" : "none"}`}>
-    {weatherData.detailedForecast}
+    {weatherData.detailedForecast !== "" ? weatherData.detailedForecast : shortFcst}
   </div>
 </div>
 
