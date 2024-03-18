@@ -2,12 +2,17 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { tripData, getDateData } from "$lib/getTripData.js";
+  import { whichToShow, placesInd } from "$lib/stores.js";
 
   const dateData = getDateData();
   const currentInd = dateData[dateData.length - 1].dataInd;
   const today = new Date(new Date().toDateString());
   let mapElement;
   let map;
+  const moreInfoFunc = (dataInd) => {
+    placesInd.update(() => dataInd);
+    whichToShow.update(() => "places");
+  };
   const quickDateFormat = (d) => {
     return d.toDateString();
   };
@@ -81,7 +86,7 @@
             `Sewer: ${d.sewer}`,
             `Laundry: ${d.laundry}`,
             `Showers: ${d.showers}`,
-            `Map: <a href='https://www.google.com/maps/place/${d.lat},${d.lng}/@${d.lat},${d.lng},12z' target='_blank'>link</a>`,
+            `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
           ].join("<br>")
         );
         mrk.addTo(map);
@@ -145,6 +150,13 @@
   <button style="padding: 5pt; margin-top: 5pt" on:click={buttonClick}
     >Toggle Dates</button
   >
+  {#each $tripData as d}
+    <div
+      id={`moreInfoHiddenDiv${d.dataInd}`}
+      style="display:none"
+      on:click={() => moreInfoFunc(d.dataInd)}
+    ></div>
+  {/each}
 </main>
 
 <style>

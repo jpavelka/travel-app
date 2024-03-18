@@ -3,9 +3,9 @@ import dayjs from "dayjs";
 
 const getTripData = () => {
   const tripDataRaw = [
-    "Sunday, March 10, 2024	Driving	211	Panhandle Lodging RV Park	Canyon, TX	3466	3	1	50A	Yes	Yes	Yes\t34.9799445\t-101.8827267",
-    "Wednesday, March 13, 2024	Driving	214	Bottomless Lakes SP	Roswell, NM	3602	3	28	50A	No	No	Yes\t33.3321276\t-104.35128",
-    "Saturday, March 16, 2024	Driving	66	Brantley Lake SP	Carlsbad, NM	3313	3	24	30A	No	No	Yes\t32.5789248\t-104.3974824",
+    "Sunday, March 10, 2024	Driving	211	Panhandle Lodging RV Park	Canyon, TX	3466	3	1	50A	Yes	Yes	Yes\t34.9649238\t-101.8832092",
+    "Wednesday, March 13, 2024	Driving	214	Bottomless Lakes SP	Roswell, NM	3602	3	28	50A	No	No	Yes\t33.3164453\t-104.3308359\tBottomless Lakes Park Campground",
+    "Saturday, March 16, 2024	Driving	66	Brantley Lake SP	Carlsbad, NM	3313	3	24	30A	No	No	Yes\t32.5640317\t-104.3806931\tlimestone campground",
     "Tuesday, March 19, 2024	Driving	221	Rio Grande Winery	Las Cruces, NM	3500	1	n/a	No	No	No	No\t32.2356231\t-106.7615582",
     "Wednesday, March 20, 2024	Driving	10	Las Cruces KOA Journey	Las Cruces, NM	3500	1	TBD	50A	Yes	Yes	Yes\t32.2924695\t-106.8596845",
     "Thursday, March 21, 2024	Driving	197	Cattlerest Saloon	Wilcox, AZ	4179	1	n/a	50A	DS	No	No\t32.2365611\t-109.8531338",
@@ -36,8 +36,9 @@ const getTripData = () => {
     "Monday, July 08, 2024	Driving	191	Big Sky Deli and Bakery	Vaughn, MT	3500	1	n/a	No	No	No	No\t47.5536763\t-111.5638694",
     "Tuesday, July 09, 2024	Driving	287	7th Ranch RV Camp	Garryowen, MT	3198	1	TBD	50A	Yes	No	No\t45.4919473\t-107.3802336",
     "Wednesday, July 10, 2024	Driving	215	Keyhole SP	Moorcroft, WY	4146	2	TBD	50A	No	No	Yes\t44.3608972\t-104.7678565",
-    "Friday, July 12, 2024	Driving	103	Buffalo Ridge Camp Resort	Custer, SD	5312	8	TBD	50A	Yes	Yes	Yes\t43.758469\t-103.6153861",
-    "Saturday, July 20, 2024	Driving	178	Papa Moon Winery & Cider House	Scottsbluff, NE		1	n/a	Yes	No	No	No\t41.8877198\t-103.6202448",
+    
+    "Friday, July 12, 2024	Driving	103	Buffalo Ridge Camp Resort	Custer, SD	5312	8	TBD	50A	Yes	Yes	Yes\t43.7584652\t-103.6128112",
+    "Saturday, July 20, 2024	Driving	178	Papa Moon Winery & Cider House	Scottsbluff, NE		1	n/a	Yes	No	No	No\t41.8877158\t-103.6176699",
   ];
   const tripDataHeaders = [
     "date",
@@ -54,6 +55,7 @@ const getTripData = () => {
     "showers",
     "lat",
     "lng",
+    "mapSearchExtra",
   ];
   return tripDataRaw.map((s, i) => {
     const arr = s.split("\t");
@@ -124,7 +126,7 @@ const getWeatherData = async () => {
       );
       return nowData.concat(filtered);
     } catch {
-      return []
+      return [];
     }
   };
 

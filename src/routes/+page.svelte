@@ -2,17 +2,12 @@
   import LeafletMap from "$lib/LeafletMap.svelte";
   import Weather from "../lib/Weather.svelte";
   import WeatherWarning from "../lib/WeatherWarning.svelte";
+  import Places from "../lib/Places.svelte";
   import { browser } from "$app/environment";
-  let whichToShowInit = "map";
-  if (browser) {
-    const ls = localStorage.getItem("tab");
-    if (!!ls && ls !== "") {
-      whichToShowInit = ls;
-    }
-  }
-  $: whichToShow = whichToShowInit;
+  import { whichToShow } from "$lib/stores.js";
+  
   const tabClick = (x) => {
-    whichToShow = x;
+    whichToShow.update(() => x);
     if (browser) {
       localStorage.setItem("tab", x);
     }
@@ -24,27 +19,36 @@
     <div style="display: flex">
       <div
         class={"tab " +
-          (whichToShow === "map" ? "tabSelected" : "tabNotSelected")}
+          ($whichToShow === "map" ? "tabSelected" : "tabNotSelected")}
         on:click={() => tabClick("map")}
       >
         Map
       </div>
       <div
         class={"tab " +
-          (whichToShow === "weather" ? "tabSelected" : "tabNotSelected")}
+          ($whichToShow === "weather" ? "tabSelected" : "tabNotSelected")}
         on:click={() => tabClick("weather")}
       >
         Weather
       </div>
+      <div
+        class={"tab " +
+          ($whichToShow === "places" ? "tabSelected" : "tabNotSelected")}
+        on:click={() => tabClick("places")}
+      >
+        Places
+      </div>
       <div style="border-bottom: 1pt solid black; width: 100%"></div>
     </div>
     <WeatherWarning />
-    {#if whichToShow === "map"}
+    {#if $whichToShow === "map"}
       <div style="padding: 5pt">
         <LeafletMap />
       </div>
-    {:else if whichToShow === "weather"}
+    {:else if $whichToShow === "weather"}
       <Weather />
+    {:else if $whichToShow === "places"}
+      <Places />
     {/if}
   {:else}
     Loading page data...
@@ -54,7 +58,7 @@
 <style>
   .tab {
     font-size: 1.4rem;
-    padding: 4pt;
+    padding: 2pt 6pt;
     width: 120px;
     border: 1pt solid black;
     border-top-left-radius: 8px 8px;
