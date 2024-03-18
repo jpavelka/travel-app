@@ -4,13 +4,13 @@
   $: wait = true;
   setTimeout(() => {
     wait = false;
-  }, 3000);
+  }, 5000);
 </script>
 
 {#if $tripWeatherData.length === 0}
   {wait
     ? "Loading weather data..."
-    : "There was an issue loading weather data, please reload the page."}
+    : "Data load taking longer than usual, you may want to refresh the page."}
 {:else}
   {#each $tripWeatherData as weatherData}
     <WeatherLine {weatherData} />
