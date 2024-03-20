@@ -106,10 +106,9 @@
     height: 50px;
   }
   .dayTime {
-    width: 140px;
+    width: 120px;
     font-size: 1.1rem;
     text-align: center;
-    padding: 0 0 0 4pt;
   }
   .weatherIcon {
     height: 50px;

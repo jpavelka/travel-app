@@ -5,7 +5,7 @@
   import { scrollToToday } from "$lib/index.js";
   import dayjs from "dayjs";
 
-  const labelWidth = 90;
+  const labelWidth = 105;
   const dayLen = 80;
 
   const cgColors = [
@@ -103,23 +103,23 @@
 </script>
 
 <div
-  style={`height:${totalHeight}px;width=100%;border:1pt solid black;padding:5pt;display:flex`}
+  style={`height:${totalHeight}px;width=100%;border:1pt solid black;padding:5pt 2pt;display:flex`}
 >
   <div>
     <svg height={totalHeight} width={labelWidth} style="">
-      <text x={labelWidth - 7} y={yVals[0] + textYDeflect} text-anchor="end"
+      <text x={labelWidth - 5} y={yVals[0] + textYDeflect} text-anchor="end"
         >Campground</text
       >
-      <text x={labelWidth - 7} y={yVals[1] + textYDeflect} text-anchor="end"
+      <text x={labelWidth - 5} y={yVals[1] + textYDeflect} text-anchor="end"
         >Electric</text
       >
-      <text x={labelWidth - 7} y={yVals[2] + textYDeflect} text-anchor="end"
+      <text x={labelWidth - 5} y={yVals[2] + textYDeflect} text-anchor="end"
         >Sewer</text
       >
-      <text x={labelWidth - 7} y={yVals[3] + textYDeflect} text-anchor="end"
+      <text x={labelWidth - 5} y={yVals[3] + textYDeflect} text-anchor="end"
         >Laundry</text
       >
-      <text x={labelWidth - 7} y={yVals[4] + textYDeflect} text-anchor="end"
+      <text x={labelWidth - 5} y={yVals[4] + textYDeflect} text-anchor="end"
         >Showers</text
       >
     </svg>
