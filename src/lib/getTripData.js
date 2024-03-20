@@ -20,6 +20,7 @@ const getTripData = () => {
     "Monday, April 22, 2024	Driving	148	Grand Canyon Trailer Village	Grand Canyon, AZ	7021	3	TBD	50A	Yes	Yes	Yes\t36.0528892\t-112.1150912",
     "Thursday, April 25, 2024	Driving	57	Navajo Land Hotel	Tuba City, AZ	4941	2	TBD	50A	Yes	No	No\t36.1306034\t-111.2420668\tNavajoLand Tuba City R.V. Park",
     "Saturday, April 27, 2024	Driving	82	Waheap RV Park Lower CG	Page, AZ	3732	3	TBD	50A	Yes	Yes	Yes\t36.997326\t-111.4990853",
+    "Tuesday, April 30, 2024	Driving	151	Zion Canyon CG	Springdale, UT	3921	7	E36	50A	Yes	Yes	Yes\t37.1929646\t-112.9912374",
     "Tuesday, May 07, 2024	Driving	118	Dixie Forest RV Resort	Panguitch, UT	6633	7	38D	50A	Yes	Yes	Yes\t37.8146135\t-112.4346644",
     "Tuesday, May 14, 2024	Driving	256	Moab KOA	Moab, UT	4607	7	TBD	50A	Yes	Yes	Yes\t38.523874\t-109.4963551",
     "Tuesday, May 21, 2024	Driving	223	Vernal KOA	Vernal, UT	5318	3	TBD	50A	Yes	Yes	Yes\t40.4694307\t-109.5285888",

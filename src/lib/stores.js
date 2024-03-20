@@ -12,5 +12,12 @@ if (browser) {
 const whichToShow = writable(whichToShowInit);
 
 const placesInd = writable(getDateData()[0].dataInd);
+const placesMapType = writable("loc");
 
-export { placesInd, whichToShow };
+placesInd.subscribe(() => {
+  placesMapType.update(() => "loc");
+})
+
+const mapShown = writable(whichToShowInit === "map");
+
+export { placesInd, whichToShow, mapShown, placesMapType };

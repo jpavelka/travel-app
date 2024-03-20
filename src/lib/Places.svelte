@@ -1,11 +1,10 @@
 <script>
   import { tripData, getDateData } from "$lib/getTripData.js";
-  import { placesInd } from "$lib/stores.js";
+  import { placesInd, placesMapType } from "$lib/stores.js";
   import { getSrc } from "$lib/gmap.js";
   import dayjs from "dayjs";
 
   $: placeData = $tripData[$placesInd];
-  $: mapType = "loc";
   const getDataMapStr = (d, latLngOnly) => {
     let s;
     if (latLngOnly) {
@@ -16,9 +15,9 @@
     return encodeURIComponent(s);
   };
   $: mapQueryStr =
-    mapType === "loc"
+    $placesMapType === "loc"
       ? getDataMapStr(placeData, false)
-      : mapType === "fromLast"
+      : $placesMapType === "fromLast"
         ? `&origin=${getDataMapStr($tripData[$placesInd - 1], true)}&destination=${getDataMapStr(placeData, true)}`
         : `&origin=${getDataMapStr(placeData, true)}&destination=${getDataMapStr($tripData[$placesInd + 1], true)}`;
   $: dt = dayjs(placeData.date);
@@ -66,7 +65,6 @@
     on:click={() => {
       if ($placesInd > 0) {
         placesInd.update((x) => x - 1);
-        mapType = 'loc';
       }
     }}
   >
@@ -77,7 +75,6 @@
     class="quickLink"
     on:click={() => {
       placesInd.update((x) => getDateData()[0].dataInd);
-      mapType = 'loc';
     }}
   >
     Today
@@ -90,29 +87,30 @@
     on:click={() => {
       if ($placesInd < $tripData.length - 1) {
         placesInd.update((x) => x + 1);
-        mapType = 'loc';
       }
     }}
   >
     Next
   </span>
 </div>
-<div style="font-size:1.5rem;font-weight:bold;margin-top:12pt">Map
+<div style="font-size:1.5rem;font-weight:bold;margin-top:12pt">
+  Map
   <span>
-  <select bind:value={mapType} style="height:2rem;margin-bottom:5pt;font-size:1.1rem">
-    <option class="mapOption" value="loc">Location</option>
-    {#if $placesInd > 0}
-    <option class="mapOption" value="fromLast">Directions From Last</option>
-    {/if}
-    {#if $placesInd < $tripData.length - 1}
-    <option class="mapOption" value="toNext">Directions To Next</option>
-    {/if}
-  </select>
+    <select
+      bind:value={$placesMapType}
+      style="height:2rem;margin-bottom:5pt;font-size:1.1rem"
+    >
+      <option class="mapOption" value="loc">Location</option>
+      {#if $placesInd > 0}
+        <option class="mapOption" value="fromLast">Directions From Last</option>
+      {/if}
+      {#if $placesInd < $tripData.length - 1}
+        <option class="mapOption" value="toNext">Directions To Next</option>
+      {/if}
+    </select>
   </span>
 </div>
-<div style="font-size:1.2rem;">
-  
-</div>
+<div style="font-size:1.2rem;"></div>
 <div style="height:40vh;min-height:200px">
   <iframe
     height="100%"
@@ -121,7 +119,7 @@
     loading="lazy"
     allowfullscreen
     referrerpolicy="no-referrer-when-downgrade"
-    src={getSrc(mapType === "loc" ? "place" : "directions", mapQueryStr)}
+    src={getSrc($placesMapType === "loc" ? "place" : "directions", mapQueryStr)}
   >
   </iframe>
   <div style="font-size:1.3rem;padding-left:10pt">
@@ -144,6 +142,6 @@
     color: gray;
   }
   .mapOption {
-    font-size: 1.2rem
+    font-size: 1.2rem;
   }
 </style>

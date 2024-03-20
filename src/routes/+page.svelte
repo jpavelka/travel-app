@@ -3,8 +3,9 @@
   import Weather from "../lib/Weather.svelte";
   import WeatherWarning from "../lib/WeatherWarning.svelte";
   import Places from "../lib/Places.svelte";
+  import Timeline from "../lib/Timeline.svelte";
   import { browser } from "$app/environment";
-  import { whichToShow } from "$lib/stores.js";
+  import { whichToShow, mapShown } from "$lib/stores.js";
   
   const tabClick = (x) => {
     whichToShow.update(() => x);
@@ -20,7 +21,12 @@
       <div
         class={"tab " +
           ($whichToShow === "map" ? "tabSelected" : "tabNotSelected")}
-        on:click={() => tabClick("map")}
+        on:click={() => {
+          tabClick("map");
+          if (!$mapShown) {
+            mapShown.update(() => true);
+          }
+        }}
       >
         Map
       </div>
@@ -38,18 +44,32 @@
       >
         Places
       </div>
+      <div
+        class={"tab " +
+          ($whichToShow === "timeline" ? "tabSelected" : "tabNotSelected")}
+        on:click={() => tabClick("timeline")}
+      >
+        Timeline
+      </div>
       <div style="border-bottom: 1pt solid black; width: 100%"></div>
     </div>
     <WeatherWarning />
-    {#if $whichToShow === "map"}
-      <div style="padding: 5pt">
-        <LeafletMap />
+    <div style="padding: 5pt">
+      {#if $mapShown}
+        <div style={`display:${$whichToShow === "map" ? "block" : "none"}`}>
+          <LeafletMap />
+        </div>
+      {/if}
+      <div style={`display:${$whichToShow === "weather" ? "block" : "none"}`}>
+        <Weather />
       </div>
-    {:else if $whichToShow === "weather"}
-      <Weather />
-    {:else if $whichToShow === "places"}
-      <Places />
-    {/if}
+      <div style={`display:${$whichToShow === "places" ? "block" : "none"}`}>
+        <Places />
+      </div>
+      <div style={`display:${$whichToShow === "timeline" ? "block" : "none"}`}>
+        <Timeline />
+      </div>
+    </div>
   {:else}
     Loading page data...
   {/if}
@@ -58,7 +78,7 @@
 <style>
   .tab {
     font-size: 1.4rem;
-    padding: 2pt 6pt;
+    padding: 3pt 5pt;
     width: 120px;
     border: 1pt solid black;
     border-top-left-radius: 8px 8px;

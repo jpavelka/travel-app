@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { tripData, getDateData } from "$lib/getTripData.js";
-  import { whichToShow, placesInd } from "$lib/stores.js";
+  import { whichToShow, placesInd, mapShown } from "$lib/stores.js";
 
   const dateData = getDateData();
   const currentInd = dateData[dateData.length - 1].dataInd;
@@ -18,7 +18,7 @@
   };
 
   onMount(async () => {
-    if (browser) {
+    if (browser && $mapShown) {
       const L = await import("leaflet");
 
       map = L.map(mapElement).setView([55, 0], 13);

@@ -6,7 +6,7 @@
   let problems = {};
 
   for (const wd of $tripWeatherData) {
-    if (wd.temperature < lowTemp) {
+    if (wd.temperature <= lowTemp) {
       const dt = dayjs(wd.startTime).format("ddd M D");
       if (Object.keys(problems).includes(dt)) {
         problems[dt] = Math.min(problems[dt], wd.temperature);
