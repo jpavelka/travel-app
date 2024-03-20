@@ -4,10 +4,11 @@
 
   const lowTemp = 34;
   let problems = {};
+  const fmt = "ddd M/D";
 
   for (const wd of $tripWeatherData) {
     if (wd.temperature <= lowTemp) {
-      const dt = dayjs(wd.startTime).format("ddd M D");
+      const dt = dayjs(wd.startTime).format(fmt);
       if (Object.keys(problems).includes(dt)) {
         problems[dt] = Math.min(problems[dt], wd.temperature);
       } else {
@@ -18,7 +19,7 @@
   let problemList = [];
   let dtUsed = [];
   for (const wd of $tripWeatherData) {
-    const dt = dayjs(wd.startTime).format("ddd M D");
+    const dt = dayjs(wd.startTime).format(fmt);
     if (Object.keys(problems).includes(dt) && !dtUsed.includes(dt)) {
       dtUsed.push(dt);
       problemList.push({ dt: dt, temp: problems[dt] });

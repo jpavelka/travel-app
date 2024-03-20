@@ -84,7 +84,7 @@
   <span
     class="quickLink"
     on:click={() => {
-      placesInd.update((x) => getDateData()[0].dataInd);
+      placesInd.update((x) => getDateData(new Date())[0].dataInd);
     }}
   >
     Today

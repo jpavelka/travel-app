@@ -1,7 +1,6 @@
 <script>
   import LeafletMap from "$lib/LeafletMap.svelte";
   import Weather from "../lib/Weather.svelte";
-  import WeatherWarning from "../lib/WeatherWarning.svelte";
   import Places from "../lib/Places.svelte";
   import Timeline from "../lib/Timeline.svelte";
   import { browser } from "$app/environment";
@@ -60,7 +59,6 @@
       </div>
       <div style="border-bottom: 1pt solid black; width: 100%"></div>
     </div>
-    <WeatherWarning />
     <div style="padding: 5pt">
       {#if $mapShown}
         <div style={`display:${$whichToShow === "map" ? "block" : "none"}`}>

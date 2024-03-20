@@ -4,8 +4,8 @@
   import { tripData, getDateData } from "$lib/getTripData.js";
   import { whichToShow, placesInd, mapShown } from "$lib/stores.js";
 
-  const dateData = getDateData();
-  const currentInd = dateData[dateData.length - 1].dataInd;
+  const dateData = getDateData(new Date());
+  const currentInd = dateData[0].dataInd;
   const today = new Date(new Date().toDateString());
   let mapElement;
   let map;
@@ -64,6 +64,8 @@
         i = parseInt(i);
         const d = $tripData[i];
         let opts = { icon: blueIcon };
+        if (d.city === "Las Cruces, NM") {
+        }
         if (currentInd === i || d.date - today === 0) {
           opts = { icon: goldIcon };
         } else if (d.date < today) {
@@ -72,7 +74,7 @@
         const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
         txtMrk.bindTooltip(
           d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
-          { permanent: true, className: "date-label", offset: [1, 0] }
+          { permanent: true, className: "date-label", offset: [1, 0] },
         );
         txtMrk.addTo(map);
         const mrk = L.marker([d.lat, d.lng], opts);
@@ -87,7 +89,7 @@
             `Laundry: ${d.laundry}`,
             `Showers: ${d.showers}`,
             `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
-          ].join("<br>")
+          ].join("<br>"),
         );
         mrk.addTo(map);
         if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
@@ -102,7 +104,7 @@
               [lastD.lat, lastD.lng],
               [d.lat, d.lng],
             ],
-            { color: color, weight: 8 }
+            { color: color, weight: 8 },
           );
           line.addTo(map);
           const clickLine = L.polyline(
@@ -110,7 +112,7 @@
               [lastD.lat, lastD.lng],
               [d.lat, d.lng],
             ],
-            { opacity: 0, weight: 30 }
+            { opacity: 0, weight: 30 },
           );
           clickLine.bindPopup(
             [
@@ -120,7 +122,7 @@
               `To: ${d.campground} (${d.city})`,
               `Distance: ${d.miles} miles`,
               `Map: <a href='https://www.google.com/maps/dir/${lastD.lat},${lastD.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`,
-            ].join("<br>")
+            ].join("<br>"),
           );
           clickLine.addTo(map);
         }

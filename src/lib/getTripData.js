@@ -77,7 +77,6 @@ const getTripData = () => {
 const tripData = readable(getTripData());
 
 const getDateData = (d) => {
-  d = d || new Date();
   let currentInd = -1;
   const dt = new Date(d);
   for (const td of get(tripData)) {
