@@ -5,8 +5,9 @@
   import Places from "../lib/Places.svelte";
   import Timeline from "../lib/Timeline.svelte";
   import { browser } from "$app/environment";
-  import { whichToShow, mapShown } from "$lib/stores.js";
-  
+  import { whichToShow, mapShown, timelineShown } from "$lib/stores.js";
+  import { scrollToToday } from "$lib/index.js";
+
   const tabClick = (x) => {
     whichToShow.update(() => x);
     if (browser) {
@@ -47,7 +48,13 @@
       <div
         class={"tab " +
           ($whichToShow === "timeline" ? "tabSelected" : "tabNotSelected")}
-        on:click={() => tabClick("timeline")}
+        on:click={() => {
+          tabClick("timeline");
+          if (!$timelineShown) {
+            timelineShown.update(() => true);
+            scrollToToday();
+          }
+        }}
       >
         Timeline
       </div>

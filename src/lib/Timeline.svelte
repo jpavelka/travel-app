@@ -1,6 +1,8 @@
 <script>
   import { tripData } from "$lib/getTripData.js";
   import { onMount } from "svelte";
+  import { timelineScrollAmt } from "$lib/stores.js";
+  import { scrollToToday } from "$lib/index.js";
   import dayjs from "dayjs";
 
   const labelWidth = 90;
@@ -29,7 +31,7 @@
   const yellow = "#bcbd22";
   const red = "#d62728";
   const gray = "#7f7f7f";
-  let scrollAmt = 0;
+  let tlScrollAmt = undefined;
   for (const i in $tripData) {
     const td = $tripData[i];
     const lineLen = dayLen * td.nights;
@@ -38,7 +40,9 @@
       const lastDay = dayData[dayData.length - 1];
       dayData.push({ dt: lastDay.dt.add(1, "days"), x: lastDay.x + dayLen });
       if (new Date(lastDay.dt).toDateString() === new Date().toDateString()) {
-        scrollAmt = dayData[dayData.length - 1].x - 1.5 * dayLen;
+        const amt = dayData[dayData.length - 1].x - 1.5 * dayLen;
+        timelineScrollAmt.update(() => amt);
+        tlScrollAmt = amt;
       }
       nightEnd += 1;
     }
@@ -90,7 +94,7 @@
   }
 
   onMount(() => {
-    document.getElementById("timelineDiv").scrollLeft = scrollAmt;
+    scrollToToday();
   });
   const yVals = [20, 80, 140, 200, 260];
   const totalHeight = Math.max(...yVals) + 60;
@@ -143,7 +147,6 @@
           style={`stroke:${d.color};stroke-width:${strokeWidth}px`}
         />
         <text
-          onclick='console.log("hi")'
           x={d.x1}
           y={yVals[0] + textYDeflect}
           text-anchor="left"
@@ -243,3 +246,7 @@
     </svg>
   </div>
 </div>
+<button
+  on:click={() => scrollToToday(tlScrollAmt)}
+  style="padding:3pt;margin-top:5pt">Scroll to Today</button
+>

@@ -11,7 +11,9 @@ if (browser) {
 }
 const whichToShow = writable(whichToShowInit);
 
-const placesInd = writable(getDateData()[0].dataInd);
+const dateData = getDateData(new Date());
+const dayInd = Math.floor(new Date().getHours() / 24 * dateData.length);
+const placesInd = writable(dateData[dayInd].dataInd);
 const placesMapType = writable("loc");
 
 placesInd.subscribe(() => {
@@ -20,4 +22,7 @@ placesInd.subscribe(() => {
 
 const mapShown = writable(whichToShowInit === "map");
 
-export { placesInd, whichToShow, mapShown, placesMapType };
+const timelineShown = writable(whichToShowInit === "timeline");
+const timelineScrollAmt = writable(0);
+
+export { placesInd, whichToShow, mapShown, placesMapType, timelineShown, timelineScrollAmt };

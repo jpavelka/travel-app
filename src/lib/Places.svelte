@@ -24,7 +24,9 @@
   const dtFrmt = "ddd MMM D";
   $: utilsStr = {};
   const noStrs = ["no", "???", "??", "?"];
+  let arrDepStr = "";
   $: if (placeData) {
+    arrDepStr = "";
     for (const util of ["electric", "sewer", "laundry", "showers"]) {
       let thisStr = "until end of trip";
       let checkInd = $placesInd + 1;
@@ -47,6 +49,14 @@
       }
       utilsStr[util] = thisStr;
     }
+    const arrival = dayjs(placeData.date);
+    const departure = arrival.add(placeData.nights, "days");
+    if (new Date(arrival).toDateString() === new Date().toDateString()) {
+      arrDepStr = "arriving today";
+    }
+    if (new Date(departure).toDateString() === new Date().toDateString()) {
+      arrDepStr = "leaving today";
+    }
   }
 </script>
 
@@ -57,7 +67,7 @@
   {dt.format(dtFrmt)}
   -
   {dt.add(placeData.nights, "days").format(dtFrmt)}
-  {` (${placeData.nights} night${placeData.nights === 1 ? "" : "s"})`}
+  {` (${placeData.nights} night${placeData.nights === 1 ? "" : "s"}${arrDepStr === "" ? "" : ", " + arrDepStr})`}
 </div>
 <div style="font-size:1.2rem">
   <span
