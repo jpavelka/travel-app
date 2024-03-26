@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
-  import { tripData, getDateData } from "$lib/getTripData.js";
+  import { tripData, diversionData, getDateData } from "$lib/getTripData.js";
   import { whichToShow, placesInd, mapShown } from "$lib/stores.js";
 
   const dateData = getDateData(new Date());
@@ -22,7 +22,7 @@
       const L = await import("leaflet");
 
       map = L.map(mapElement).setView([55, 0], 13);
-      const allPoints = [];
+      const currentPoints = [];
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
@@ -59,13 +59,21 @@
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
       });
+      const greenIcon = new L.Icon({
+        iconUrl:
+          "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+      });
 
       for (let i in $tripData) {
         i = parseInt(i);
         const d = $tripData[i];
         let opts = { icon: blueIcon };
-        if (d.city === "Las Cruces, NM") {
-        }
         if (currentInd === i || d.date - today === 0) {
           opts = { icon: goldIcon };
         } else if (d.date < today) {
@@ -93,8 +101,8 @@
         );
         mrk.addTo(map);
         if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
-          allPoints.push(L.marker([d.lat - 3.6, d.lng]));
-          allPoints.push(L.marker([d.lat + 1.5, d.lng]));
+          currentPoints.push(L.marker([d.lat - 3.6, d.lng]));
+          currentPoints.push(L.marker([d.lat + 1.5, d.lng]));
         }
         if (i !== 0) {
           const lastD = $tripData[i - 1];
@@ -127,8 +135,97 @@
           clickLine.addTo(map);
         }
       }
+      for (let i in $diversionData) {
+        i = parseInt(i);
+        const d = $diversionData[i];
+        let opts = { icon: greenIcon };
+        if (new Date(d.date) <= new Date() && new Date() <= d.leaveDate) {
+          opts = { icon: goldIcon };
+        }
+        if (d.leaveDate < today) {
+          opts = { icon: grayIcon };
+        }
+        const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
+        txtMrk.bindTooltip(
+          d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
+          { permanent: true, className: "date-label", offset: [1, 0] },
+        );
+        txtMrk.addTo(map);
+        const mrk = L.marker([d.lat, d.lng], opts);
+        mrk.bindPopup(
+          [
+            `<b>${d.campground}</b>`,
+            `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
+            `${d.city} (${d.elevation} ft)`,
+            // `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
+          ].join("<br>"),
+        );
+        mrk.addTo(map);
+        if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
+          currentPoints.push(L.marker([d.lat - 3.6, d.lng]));
+          currentPoints.push(L.marker([d.lat + 1.5, d.lng]));
+        }
 
-      const group = L.featureGroup(allPoints);
+        const fromD = $tripData[d.fromCampgroundInd];
+        const fromColor = d.date < today ? "#bbb" : "#2d6";
+        const fromLine = L.polyline(
+          [
+            [fromD.lat, fromD.lng],
+            [d.lat, d.lng],
+          ],
+          { color: fromColor, weight: 8, dashArray: "10,30" },
+        );
+        fromLine.addTo(map);
+        const fromClickLine = L.polyline(
+          [
+            [fromD.lat, fromD.lng],
+            [d.lat, d.lng],
+          ],
+          { opacity: 0, weight: 30 },
+        );
+        fromClickLine.bindPopup(
+          [
+            "<b>Driving</b>",
+            quickDateFormat(d.date),
+            `From: ${fromD.campground} (${fromD.city})`,
+            `To: ${d.campground} (${d.city})`,
+            `Distance: ${d.miles} miles`,
+            `Map: <a href='https://www.google.com/maps/dir/${fromD.lat},${fromD.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`,
+          ].join("<br>"),
+        );
+        fromClickLine.addTo(map);
+
+        const toD = $tripData[d.toCampgroundInd];
+        const color = d.leaveDate < today ? "#bbb" : "#2d6";
+        const line = L.polyline(
+          [
+            [toD.lat, toD.lng],
+            [d.lat, d.lng],
+          ],
+          { color: color, weight: 8, dashArray: "10,30" },
+        );
+        line.addTo(map);
+        const toClickLine = L.polyline(
+          [
+            [toD.lat, toD.lng],
+            [d.lat, d.lng],
+          ],
+          { opacity: 0, weight: 30 },
+        );
+        toClickLine.bindPopup(
+          [
+            "<b>Driving</b>",
+            quickDateFormat(d.date),
+            `From: ${toD.campground} (${toD.city})`,
+            `To: ${d.campground} (${d.city})`,
+            `Distance: ${d.miles} miles`,
+            `Map: <a href='https://www.google.com/maps/dir/${toD.lat},${toD.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`,
+          ].join("<br>"),
+        );
+        toClickLine.addTo(map);
+      }
+
+      const group = L.featureGroup(currentPoints);
       map.fitBounds(group.getBounds());
       buttonClick();
     }
