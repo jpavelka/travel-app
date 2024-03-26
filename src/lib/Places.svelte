@@ -1,6 +1,7 @@
 <script>
   import { tripData, getDateData } from "$lib/getTripData.js";
   import { placesInd, placesMapType } from "$lib/stores.js";
+  import { wikiCityState } from "$lib/index.js";
   import { getSrc } from "$lib/gmap.js";
   import dayjs from "dayjs";
 
@@ -58,11 +59,22 @@
       arrDepStr = "leaving today";
     }
   }
+  $: wikiUrl = `https://en.m.wikipedia.org/wiki/${wikiCityState(placeData.city)}`;
+  let showWiki = false;
+  const allCampgrounds = $tripData.map(x => {return {cg: x.campground, ind: x.dataInd, city: x.city}});
 </script>
 
 <div style="font-weight:bold;font-size:2rem;margin-top:10pt">
   {placeData.campground}
 </div>
+<select id="placesSelect" value={$placesInd} on:change={(e) => {
+  placesInd.update(() => parseInt(e.target.value));
+}} style='padding:4pt'>
+  <option style='font-style:italic' selected disabled>Select location</option>
+  {#each allCampgrounds as cg}
+    <option value={cg.ind}>{cg.cg} ({cg.city})</option>
+  {/each}
+</select>
 <div style="font-size:1.4rem">
   {dt.format(dtFrmt)}
   -
@@ -129,11 +141,20 @@
     loading="lazy"
     allowfullscreen
     referrerpolicy="no-referrer-when-downgrade"
-    src={getSrc($placesMapType === "loc" ? "place" : "directions", mapQueryStr)}
+    src={getSrc(
+      $placesMapType === "loc" ? "place" : "directions",
+      mapQueryStr,
+    )}
   >
   </iframe>
   <div style="font-size:1.3rem;padding-left:10pt">
-    <div>City: {placeData.city}</div>
+    <div>City: {placeData.city} <span style='color:blue;font-size:1rem;cursor:pointer' on:click={() => {
+      showWiki = !showWiki
+    }}>({showWiki ? "hide" : "show"} wiki)</span></div>
+    {#if showWiki}
+      <iframe style="width:90%;max-width:800px;height:500px" src={wikiUrl}
+      ></iframe>
+    {/if}
     <div>Elevation: {placeData.elevation} ft</div>
     <div>Site: {placeData.site}</div>
     <div>Electric: {placeData.electric} ({utilsStr.electric})</div>

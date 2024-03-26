@@ -13,4 +13,24 @@ const scrollToToday = (amt) => {
     }
 };
 
-export { scrollToToday }
+const wikiCityState = (c) => {
+    const abbrevs = {
+        'TX': 'Texas',
+        'NM': 'New Mexico',
+        'AZ': 'Arizona',
+        'CA': 'California',
+        'UT': 'Utah',
+        'WY': 'Wyoming',
+        'MT': 'Montana',
+        'AB': 'Alberta',
+        'SD': 'South Dakota',
+        'NE': 'Nebraska'
+    }
+    let cSplit = c.split(', ')
+    if (Object.keys(abbrevs).includes(cSplit[cSplit.length - 1])) {
+        cSplit[cSplit.length - 1] = abbrevs[cSplit[cSplit.length - 1]]
+    }
+    return cSplit.join(', ')
+}
+
+export { scrollToToday, wikiCityState }
