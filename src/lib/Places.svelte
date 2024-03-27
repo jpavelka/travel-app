@@ -155,6 +155,7 @@
       <iframe style="width:90%;max-width:800px;height:500px" src={wikiUrl}
       ></iframe>
     {/if}
+    <div>Time zone: {placeData.timezone}</div>
     <div>Elevation: {placeData.elevation} ft</div>
     <div>Site: {placeData.site}</div>
     <div>Electric: {placeData.electric} ({utilsStr.electric})</div>

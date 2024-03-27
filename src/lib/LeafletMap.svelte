@@ -91,6 +91,7 @@
             `<b>${d.campground}</b>`,
             `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
             `${d.city} (${d.elevation} ft)`,
+            `Time zone: ${d.timezone}`,
             `Site: ${d.site}`,
             `Electric: ${d.electric}`,
             `Sewer: ${d.sewer}`,
@@ -157,6 +158,7 @@
             `<b>${d.campground}</b>`,
             `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
             `${d.city} (${d.elevation} ft)`,
+            `Time zone: ${d.timezone}`,
             // `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
           ].join("<br>"),
         );
