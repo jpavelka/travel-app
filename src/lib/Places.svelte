@@ -11,7 +11,7 @@
     if (latLngOnly) {
       s = d.lat + "," + d.lng;
     } else {
-      s = d.campground + " " + d.mapSearchExtra + " " + d.lat + "," + d.lng;
+      s = d.mapSearchReplace != "" ? d.mapSearchReplace : (d.campground + " " + d.mapSearchExtra + " " + d.lat + "," + d.lng);
     }
     return encodeURIComponent(s);
   };
