@@ -19,7 +19,7 @@
     clearNight: "https://img.icons8.com/?size=48&id=13477&format=png",
     wind: "https://img.icons8.com/?size=48&id=pLiaaoa41R9n&format=png",
   };
-  let iconSrc = weatherData.isDaytime ? icons.sunny : icons.clearNight;
+  $: iconSrc = weatherData.isDaytime ? icons.sunny : icons.clearNight;
   const shortFcst = weatherData.shortForecast;
   if (shortFcst.toLowerCase().includes("cloudy")) {
     if (weatherData.isDaytime && shortFcst.toLowerCase().includes("partly")) {
@@ -28,7 +28,7 @@
       iconSrc = icons.cloudy;
     }
   }
-  const precipChance = weatherData.probabilityOfPrecipitation.value || 1;
+  $: precipChance = weatherData.probabilityOfPrecipitation.value || 1;
   if (precipChance > 50) {
     iconSrc = icons.rain;
   }
