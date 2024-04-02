@@ -1,20 +1,25 @@
 <script>
-  import { tripWeatherData } from "$lib/getTripData";
+  import { tripWeatherData, hourlyWeatherData } from "$lib/getTripData";
   import WeatherWarning from "../lib/WeatherWarning.svelte";
   import WeatherLine from "./WeatherLine.svelte";
   $: wait = true;
   setTimeout(() => {
     wait = false;
   }, 5000);
+  $: showHourly = false;
+  $: dispWeatherData = showHourly ? $hourlyWeatherData.slice(0, 24) : $tripWeatherData;
 </script>
 
-{#if $tripWeatherData.length === 0}
+{#if dispWeatherData.length === 0}
   {wait
     ? "Loading weather data..."
     : "Data load taking longer than usual, you may want to refresh the page."}
 {:else}
   <WeatherWarning />
-  {#each $tripWeatherData as weatherData}
-    <WeatherLine {weatherData} />
+  <a style="color:blue;cursor:pointer" on:click={() => {
+    showHourly = !showHourly
+  }}>Switch to {showHourly ? 'daily' : 'hourly'}</a>
+  {#each dispWeatherData as weatherData}
+    <WeatherLine {weatherData} {showHourly} />
   {/each}
 {/if}

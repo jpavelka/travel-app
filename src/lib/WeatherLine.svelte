@@ -1,7 +1,8 @@
 <script>
   import dayjs from "dayjs";
   export let weatherData;
-  const dayTime =
+  export let showHourly;
+  $: dayTime = showHourly ? dayjs(weatherData.startTime).format("ddd M/D ha") :
     weatherData.name === "Now"
       ? "Now"
       : weatherData.name === "Overnight"
@@ -80,9 +81,11 @@
       <div class="fcst">{shortFcst}</div>
     {/if}
   </a>
-  <div class="dtlFcst" style={`display: ${showDtlFcst ? "block" : "none"}`}>
-    {weatherData.detailedForecast !== "" ? weatherData.detailedForecast : shortFcst}
-  </div>
+  {#if !showHourly || innerWidth < smallWidth}
+    <div class="dtlFcst" style={`display: ${showDtlFcst ? "block" : "none"}`}>
+      {weatherData.detailedForecast !== "" ? weatherData.detailedForecast : shortFcst}
+    </div>
+  {/if}
 </div>
 
 <style>
