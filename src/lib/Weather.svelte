@@ -6,7 +6,7 @@
   setTimeout(() => {
     wait = false;
   }, 5000);
-  $: showHourly = false;
+  $: showHourly = (localStorage.getItem("forecastType") || "hourly") === "hourly";
   $: dispWeatherData = showHourly ? $hourlyWeatherData.slice(0, 24) : $tripWeatherData;
 </script>
 
@@ -17,7 +17,8 @@
 {:else}
   <WeatherWarning />
   <a style="color:blue;cursor:pointer" on:click={() => {
-    showHourly = !showHourly
+    showHourly = !showHourly;
+    localStorage.setItem('forecastType', showHourly ? 'hourly' : 'daily');
   }}>Switch to {showHourly ? 'daily' : 'hourly'}</a>
   {#each dispWeatherData as weatherData}
     <WeatherLine {weatherData} {showHourly} />

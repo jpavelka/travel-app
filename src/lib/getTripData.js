@@ -285,7 +285,6 @@ const getHourlyWeatherData = async () => {
       allHourlyWeatherInfo[i].travelData.campground !==
         allHourlyWeatherInfo[i - 1].travelData.campground
     ) {
-      console.log(allHourlyWeatherInfo[i])
       allHourlyWeatherInfo[i].isNewLocation = true;
     }
     if (i === 0 || new Date(allHourlyWeatherInfo[i].startTime).getDate() !== new Date(allHourlyWeatherInfo[i - 1].startTime).getDate()) {
