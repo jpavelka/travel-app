@@ -2,7 +2,7 @@
   import dayjs from "dayjs";
   export let weatherData;
   export let showHourly;
-  $: dayTime = showHourly ? dayjs(weatherData.startTime).format("ddd M/D ha") :
+  $: dayTime = showHourly ? dayjs(weatherData.startTime).format("h a") :
     weatherData.name === "Now"
       ? "Now"
       : weatherData.name === "Overnight"
@@ -45,6 +45,11 @@
   <div class="loc">
     {weatherData.travelData.campground}
     <span style="font-size: 1.3rem">({weatherData.travelData.city})</span>
+  </div>
+{/if}
+{#if weatherData.isNewDay}
+  <div class="dayHeader">
+    {dayjs(weatherData.startTime).format('ddd MMM D')}
   </div>
 {/if}
 <div class="dayWeatherLine">
@@ -93,6 +98,12 @@
     font-weight: bold;
     font-size: 1.5rem;
     margin-top: 0.5rem;
+  }
+  .dayHeader {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+    margin-left: 0.5rem;
   }
   .vertLine {
     height: 100%;

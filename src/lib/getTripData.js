@@ -246,7 +246,7 @@ const getHourlyWeatherData = async () => {
       const hourlyJson = await hourlyResponse.json();
       const periods = hourlyJson.properties.periods;
       nowData = periods;
-      return nowData.concat(nowData);
+      return nowData;
     }
     try {
       return latLngDtData(lat, lng);
@@ -279,15 +279,19 @@ const getHourlyWeatherData = async () => {
   for (let i in allHourlyWeatherInfo) {
     i = parseInt(i);
     allHourlyWeatherInfo[i].isNewLocation = false;
+    allHourlyWeatherInfo[i].isNewDay = false;
     if (
       i === 0 ||
       allHourlyWeatherInfo[i].travelData.campground !==
         allHourlyWeatherInfo[i - 1].travelData.campground
     ) {
+      console.log(allHourlyWeatherInfo[i])
       allHourlyWeatherInfo[i].isNewLocation = true;
     }
+    if (i === 0 || new Date(allHourlyWeatherInfo[i].startTime).getDate() !== new Date(allHourlyWeatherInfo[i - 1].startTime).getDate()) {
+      allHourlyWeatherInfo[i].isNewDay = true;
+    }
   }
-  allHourlyWeatherInfo[0].isNewLocation = true;
   hourlyWeatherData.set(allHourlyWeatherInfo);
 };
 
