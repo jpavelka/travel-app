@@ -7,7 +7,7 @@
     wait = false;
   }, 5000);
   $: showHourly = (localStorage.getItem("forecastType") || "hourly") === "hourly";
-  $: dispWeatherData = showHourly ? $hourlyWeatherData.slice(0, 24) : $tripWeatherData;
+  $: dispWeatherData = showHourly ? $hourlyWeatherData : $tripWeatherData;
 </script>
 
 {#if dispWeatherData.length === 0}

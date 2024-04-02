@@ -150,35 +150,40 @@ const getDateData = (d) => {
 };
 
 const tripWeatherData = writable([]);
+const hourlyWeatherData = writable([]);
 
 const getWeatherData = async () => {
   const today = dayjs(new Date());
   let loopDay = dayjs(new Date());
 
   let allDateWeatherInfo = [];
+  let allHourlyWeatherInfo = [];
 
   const getWeatherData = async (lat, lng, dt) => {
     dt = new Date(dt);
     let nowData = [];
+    let nowHourlyData = [];
     const latLngDtData = async (lat, lng, dt) => {
       const response = await fetch(
         `https://api.weather.gov/points/${lat},${lng}`
       );
       const myJson = await response.json();
+      const hourlyResponse = await fetch(myJson.properties.forecastHourly);
+      const hourlyJson = await hourlyResponse.json();
+      const periods = hourlyJson.properties.periods;
+      nowHourlyData = periods;
       if (dt.toDateString() == new Date(today).toDateString()) {
-        const hourlyResponse = await fetch(myJson.properties.forecastHourly);
-        const hourlyJson = await hourlyResponse.json();
-        const periods = hourlyJson.properties.periods;
         periods[0].name = "Now";
         nowData = [periods[0]];
       }
       const forecastResponse = await fetch(myJson.properties.forecast);
       const forecastJson = await forecastResponse.json();
-      const periods = forecastJson.properties.periods;
-      const filtered = periods.filter(
+      const fcstPeriods = forecastJson.properties.periods;
+      const filtered = fcstPeriods.filter(
         (p) => new Date(p.startTime).toDateString() == dt.toDateString()
       );
-      return nowData.concat(filtered);
+      nowData = nowData.concat(filtered);
+      return [nowData, nowHourlyData];
     }
     try {
       return latLngDtData(lat, lng, dt);
@@ -189,17 +194,18 @@ const getWeatherData = async () => {
         try {
           return latLngDtData(lat, lng, dt);
         } catch {
-          return [undefined];
+          return [[undefined], [undefined]];
         }
       }
     }
   };
 
+  let lastHourlyInd = -1;
   while (loopDay < today.add(7, "day")) {
     const allDateInfo = getDateData(loopDay);
     for (const dateInfo of allDateInfo) {
       dateInfo.actualDay = loopDay;
-      let newWeatherData = await getWeatherData(
+      let [newWeatherData, newHourlyWeatherData] = await getWeatherData(
         dateInfo.lat,
         dateInfo.lng,
         loopDay
@@ -209,6 +215,21 @@ const getWeatherData = async () => {
         return wd;
       });
       allDateWeatherInfo = allDateWeatherInfo.concat(newWeatherData);
+      const hourlyInd = (dateInfo || {dataInd: lastHourlyInd}).dataInd;
+      console.log(lastHourlyInd, hourlyInd, dateInfo.date)
+      if (lastHourlyInd !== hourlyInd) {
+        lastHourlyInd = dateInfo.dataInd;
+        newHourlyWeatherData = newHourlyWeatherData.filter((wd) => {
+          return dayjs(wd.startTime) < dayjs(dateInfo.date).add(dateInfo.nights, 'day').add(12, 'hour')
+        }).filter((wd) => {
+          return dayjs(wd.startTime) >= dayjs(dateInfo.date).add(12, 'hour')
+        })
+        newHourlyWeatherData = newHourlyWeatherData.map((wd) => {
+          wd.travelData = dateInfo;
+          return wd;
+        });
+        allHourlyWeatherInfo = allHourlyWeatherInfo.concat(newHourlyWeatherData);
+      }
     }
     loopDay = loopDay.add(1, "day");
   }
@@ -223,59 +244,7 @@ const getWeatherData = async () => {
       allDateWeatherInfo[i].isNewLocation = true;
     }
   }
-  tripWeatherData.set(allDateWeatherInfo);
-};
-
-getWeatherData();
-
-const hourlyWeatherData = writable([]);
-
-const getHourlyWeatherData = async () => {
-  const today = dayjs(new Date());
-
-  let allHourlyWeatherInfo = [];
-
-  const getHourlyWeatherData = async (lat, lng) => {
-    let nowData = [];
-    const latLngDtData = async (lat, lng) => {
-      const response = await fetch(
-        `https://api.weather.gov/points/${lat},${lng}`
-      );
-      const myJson = await response.json();
-      const hourlyResponse = await fetch(myJson.properties.forecastHourly);
-      const hourlyJson = await hourlyResponse.json();
-      const periods = hourlyJson.properties.periods;
-      nowData = periods;
-      return nowData;
-    }
-    try {
-      return latLngDtData(lat, lng);
-    } catch {
-      try {
-        return latLngDtData(lat, lng);
-      } catch {
-        try {
-          return latLngDtData(lat, lng);
-        } catch {
-          return [undefined];
-        }
-      }
-    }
-  };
-
-  const allDateInfo = getDateData(today);
-  for (const dateInfo of allDateInfo) {
-    dateInfo.actualDay = today;
-    let newWeatherData = await getHourlyWeatherData(
-      dateInfo.lat,
-      dateInfo.lng
-    );
-    newWeatherData = newWeatherData.map((wd) => {
-      wd.travelData = dateInfo;
-      return wd;
-    });
-    allHourlyWeatherInfo = allHourlyWeatherInfo.concat(newWeatherData);
-  }
+  tripWeatherData.set(allDateWeatherInfo); 
   for (let i in allHourlyWeatherInfo) {
     i = parseInt(i);
     allHourlyWeatherInfo[i].isNewLocation = false;
@@ -294,6 +263,6 @@ const getHourlyWeatherData = async () => {
   hourlyWeatherData.set(allHourlyWeatherInfo);
 };
 
-getHourlyWeatherData();
+getWeatherData();
 
 export { tripData, diversionData, getDateData, tripWeatherData, hourlyWeatherData };
