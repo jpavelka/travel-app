@@ -2,8 +2,9 @@
   import dayjs from "dayjs";
   export let weatherData;
   export let showHourly;
-  $: dayTime = showHourly ? dayjs(weatherData.startTime).format("h a") :
-    weatherData.name === "Now"
+  $: dayTime = showHourly
+    ? dayjs(weatherData.startTime).format("h a")
+    : weatherData.name === "Now"
       ? "Now"
       : weatherData.name === "Overnight"
         ? "Overnight"
@@ -20,7 +21,10 @@
     wind: "https://img.icons8.com/?size=48&id=pLiaaoa41R9n&format=png",
   };
   $: iconSrc = weatherData.isDaytime ? icons.sunny : icons.clearNight;
-  const shortFcst = weatherData.shortForecast;
+  let shortFcst = '';
+  $: if (!!weatherData.shortForecast) {
+    shortFcst = weatherData.shortForecast;
+  }
   if (shortFcst.toLowerCase().includes("cloudy")) {
     if (weatherData.isDaytime && shortFcst.toLowerCase().includes("partly")) {
       iconSrc = icons.partlyCloudy;
@@ -49,7 +53,7 @@
 {/if}
 {#if weatherData.isNewDay}
   <div class="dayHeader">
-    {dayjs(weatherData.startTime).format('ddd MMM D')}
+    {dayjs(weatherData.startTime).format("ddd MMM D")}
   </div>
 {/if}
 <div class="dayWeatherLine">
@@ -88,7 +92,9 @@
   </a>
   {#if !showHourly || innerWidth < smallWidth}
     <div class="dtlFcst" style={`display: ${showDtlFcst ? "block" : "none"}`}>
-      {weatherData.detailedForecast !== "" ? weatherData.detailedForecast : shortFcst}
+      {weatherData.detailedForecast !== ""
+        ? weatherData.detailedForecast
+        : shortFcst}
     </div>
   {/if}
 </div>

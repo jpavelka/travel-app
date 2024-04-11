@@ -216,7 +216,6 @@ const getWeatherData = async () => {
       });
       allDateWeatherInfo = allDateWeatherInfo.concat(newWeatherData);
       const hourlyInd = (dateInfo || {dataInd: lastHourlyInd}).dataInd;
-      console.log(lastHourlyInd, hourlyInd, dateInfo.date)
       if (lastHourlyInd !== hourlyInd) {
         lastHourlyInd = dateInfo.dataInd;
         newHourlyWeatherData = newHourlyWeatherData.filter((wd) => {
