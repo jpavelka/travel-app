@@ -140,7 +140,7 @@
         i = parseInt(i);
         const d = $diversionData[i];
         let opts = { icon: greenIcon };
-        if (new Date(d.date) <= new Date() && new Date() <= d.leaveDate) {
+        if (new Date(d.date) <= new Date() && (new Date() <= d.leaveDate || new Date().toDateString() === d.leaveDate.toDateString())) {
           opts = { icon: goldIcon };
         }
         if (d.leaveDate < today) {
