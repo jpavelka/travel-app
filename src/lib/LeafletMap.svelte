@@ -163,19 +163,23 @@
       for (let i in $pointOfInterestData) {
         i = parseInt(i);
         const d = $pointOfInterestData[i];
+        const parent = d.parentType === 'campground' ? $tripData[d.parentInd] : $diversionData[d.parentInd];
         let opts = { icon: redIconSmall };
         const mrk = L.marker([d.lat, d.lng], opts);
         mrk.bindPopup(
           [
-            `<b>${d.activity}</b>`,
+            `${d.activity}`,
             `${d.campground}`,
             `${d.city}`,
-          ].filter(x => x.length > 0).join("<br>"),
+            `<a href='https://www.google.com/maps/dir/${parent.lat},${parent.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>Directions from site</a>`,
+            `<a href='https://www.google.com/maps/dir/Current+Location/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>Directions from current location</a>`,
+          ].filter(x => x.length > 0).map((val, ind) => {
+            return ind === 0 ? '<b>' + val + '</b>' : val
+          }).join("<br>"),
         );
         mrk.addTo(map);
         pointsOfInterest.push(mrk);
         // const lineColor = "#d23";
-        // const parent = d.parentType === 'campground' ? $tripData[d.parentInd] : $diversionData[d.parentInd];
         // const poiLine = L.polyline(
         //   [
         //     [parent.lat, parent.lng],

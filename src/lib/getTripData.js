@@ -26,7 +26,7 @@ const getTripData = () => {
 ,Ballroom Dance,,,"Tucson, AZ",,,,,,,,32.3067331,-111.0097629,,,
 "Friday, April 05, 2024",Driving,245,Pilot Knob RV Resort,"Winterhaven, CA",272,2,TBD,50A,Yes,Yes,Yes,32.747145,-114.7636939,PDT (GMT-7),Encore,
 "Sunday, April 07, 2024",Driving,141,1000 Trails Palm Springs,"Palm Desert, CA",119,7,TBD,50A,Yes,Yes,Yes,33.7634686,-116.3109684,PDT (GMT-7),,
-,Joshua Tree National Park,,,,,,,,,,,33.873415,-115.9009923,,,
+,Joshua Tree National Park,,,,,,,,,,,33.990501574776125,-116.16168603565941,,,
 ,SoCal Lindberg Meetup,,Sylvan Park,"Redlands, CA",,,,,,,,34.0599329,-117.1680177,,,
 "Sunday, April 14, 2024",Driving,180,North Ranch RV Park,"Congress, AZ",2801,2,TBD,30A,Yes,Yes,Yes,34.104932,-112.8309524,MST (GMT-7),,
 "Tuesday, April 16, 2024",Driving,93,Dead Horse Ranch SP,"Cottonwood, AZ",3320,3,DHR-87,50A,No,Yes,Yes,34.7537237,-112.0215606,MST (GMT-7),,
