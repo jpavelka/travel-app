@@ -164,12 +164,6 @@
         i = parseInt(i);
         const d = $pointOfInterestData[i];
         let opts = { icon: redIconSmall };
-        const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
-        txtMrk.bindTooltip(
-          d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
-          { permanent: true, className: "date-label", offset: [1, 0] },
-        );
-        txtMrk.addTo(map);
         const mrk = L.marker([d.lat, d.lng], opts);
         mrk.bindPopup(
           [
