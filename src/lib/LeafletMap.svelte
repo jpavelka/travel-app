@@ -174,34 +174,33 @@
         );
         mrk.addTo(map);
         pointsOfInterest.push(mrk);
-        const lineColor = "#d23";
-        const parent = d.parentType === 'campground' ? $tripData[d.parentInd] : $diversionData[d.parentInd];
-        const poiLine = L.polyline(
-          [
-            [parent.lat, parent.lng],
-            [d.lat, d.lng],
-          ],
-          { color: lineColor, weight: poiLineWeight, dashArray: "5,15" },
-        );
-        poiLine.addTo(map);
-        const poiClickLine = L.polyline(
-          [
-            [parent.lat, parent.lng],
-            [d.lat, d.lng],
-          ],
-          { opacity: 0, weight: poiClickLineWeight },
-        );
-        poiClickLine.bindPopup(
-          [
-            "<b>Point of Interest</b>",
-            `From: ${parent.campground} (${parent.city})`,
-            `To: ${d.campground} (${d.city})`,
-            `Map: <a href='https://www.google.com/maps/dir/${parent.lat},${parent.lng}/${d.lat},${d.lng}/@${d.lat},${d.lng}' target='_blank'>link</a>`,
-          ].join("<br>"),
-        );
-        poiClickLine.addTo(map);
-        pointsOfInterestLines.push(poiLine);
-        pointsOfInterestClickLines.push(poiClickLine);
+        // const lineColor = "#d23";
+        // const parent = d.parentType === 'campground' ? $tripData[d.parentInd] : $diversionData[d.parentInd];
+        // const poiLine = L.polyline(
+        //   [
+        //     [parent.lat, parent.lng],
+        //     [d.lat, d.lng],
+        //   ],
+        //   { color: lineColor, weight: poiLineWeight, dashArray: "5,15" },
+        // );
+        // poiLine.addTo(map);
+        // const poiClickLine = L.polyline(
+        //   [
+        //     [parent.lat, parent.lng],
+        //     [d.lat, d.lng],
+        //   ],
+        //   { opacity: 0, weight: poiClickLineWeight },
+        // );
+        // poiClickLine.bindPopup(
+        //   [
+        //     "<b>Point of Interest</b>",
+        //     `From: ${parent.campground} (${parent.city})`,
+        //     `To: ${d.campground} (${d.city})`,
+        //   ].join("<br>"),
+        // );
+        // poiClickLine.addTo(map);
+        // pointsOfInterestLines.push(poiLine);
+        // pointsOfInterestClickLines.push(poiClickLine);
       }
       
       map.on('zoomend', function() {
