@@ -45,7 +45,7 @@ const getTripData = () => {
 ,Walnut Canyon National Monument,,,,,,,,,,,35.1690189,-111.5043369,,,
 ,Arthur's house,,,"Flagstaff, AZ",,,,,,,,35.20500687,-111.6459523,,,
 "Monday, April 22, 2024",Driving,148,Grand Canyon Trailer Village,"Grand Canyon, AZ",7021,3,TBD,50A,Yes,Yes,Yes,36.0528892,-112.1150912,MST (GMT-7),,
-,Grand Canyon National Park,,,,,,,,,,,36.2678855,-112.3535253,,,
+,Grand Canyon National Park,,,,,,,,,,,36.0591151,-112.1091934,,,
 "Thursday, April 25, 2024",Driving,57,NavajoLand Hotel,"Tuba City, AZ",4941,2,TBD,50A,Yes,No,No,36.1306034,-111.2420668,MDT (GMT-6),NavajoLand Tuba City R.V. Park,
 ,Monument Valley Tour,,,,,,,,,,,36.9813728,-110.1123657,,,
 ,Navajo Code Talkers Museum,,,"Tuba City, AZ",,,,,,,,36.1302507,-111.2405677,,,
@@ -53,11 +53,20 @@ const getTripData = () => {
 ,Upper Antelope Canyon,,,,,,,,,,,36.8619103,-111.3743302,,,
 ,Lower Antelope Canyon,,,,,,,,,,,36.9031279,-111.4132505,,,
 "Tuesday, April 30, 2024",Driving,151,Zion Canyon CG,"Springdale, UT",3921,7,E36,50A,Yes,Yes,Yes,37.1929646,-112.9912374,MDT (GMT-6),,
+,Zion National Park,,,,,,,,,,,37.2982022,-113.0263005,,,
 "Tuesday, May 07, 2024",Driving,118,Dixie Forest RV Resort,"Panguitch, UT",6633,7,38D,50A,Yes,Yes,Yes,37.8146135,-112.4346644,MDT (GMT-6),,
+,Bryce Canyon National Park,,,,,,,,,,,37.5930377,-112.1870895,,,
 "Tuesday, May 14, 2024",Driving,256,Moab KOA,"Moab, UT",4607,7,TBD,50A,Yes,Yes,Yes,38.523874,-109.4963551,MDT (GMT-6),,
+,Arches National Park,,,,,,,,,,,38.733081,-109.5925139,,,
+,Canyonlands National Park,,,,,,,,,,,38.2135733,-109.9025345,,,
+,Goblin Valley State Park,,,,,,,,,,,38.573697,-110.707109,,,
+,Fiery Furnace Hike,,,,,,,,,,,38.7435404,-109.5615864,,,
 "Tuesday, May 21, 2024",Driving,223,Vernal KOA,"Vernal, UT",5318,3,TBD,50A,Yes,Yes,Yes,40.4694307,-109.5285888,MDT (GMT-6),,
+,Dinosaur National Monument,,,,,,,,,,,40.5130533,-108.9487453,,,
 "Friday, May 24, 2024",Driving,311,Gros Ventre CG,Grand Teton NP,6568,7,99,No,No,No,No,43.6159427,-110.6658657,MDT (GMT-6),gros ventre campground,
+,Grand Teton National Park,,,,,,,,,,,43.7904282,-110.6817627,,,
 "Friday, May 31, 2024",Driving,98,Fishing Bridge RV,Yellowstone NP,7770,14,TBD,50A,Yes,Yes,Yes,44.5657137,-110.3660453,MDT (GMT-6),,
+,Yellowstone National Park,,,,,,,,,,,44.427963,-110.588455,,,
 "Friday, June 14, 2024",Driving,162,Bridger Brewing,"Three Forks, MT",4075,1,n/a,No,No,No,No,45.9202897,-111.5901746,MDT (GMT-6),,
 "Saturday, June 15, 2024",Driving,239,Lewis & Clark RV Park,"Shelby, MT",3314,1,TBD,50A,Yes,Yes,Yes,48.5240978,-111.8591962,MDT (GMT-6),,
 "Sunday, June 16, 2024",Driving,195,George Lane Memorial Park,"High River, AB",3402,2,TBD,30A,No,No,Yes,50.5784315,-113.8751605,MDT (GMT-6),,
@@ -82,11 +91,13 @@ const getTripData = () => {
 ,First Saturday Swing,,Infinity Dance,"San Diego, CA",,,,,,,,32.8267967,-117.1608955,,,
 ,Maple Canyon,,,"San Diego, CA",,,,,,,,32.7349759,-117.1638457,,,
 "Monday, April 29, 2024",Diversion,274,Luxor Hotel & Casino,"Las Vegas, NV",2001,1,TBD,Yes,Yes,Yes,Yes,36.09551,-115.1760672,PDT (GMT-7),,
+,Pick Up Nanny and Papa,,Harry Reid International Airport,"Las Vegas, NV",,,,,,,,36.0830907,-115.1482238,,,
 "Sunday, May 5, 2024",Diversion,156,Paris Las Vegas,"Las Vegas, NV",2001,2,TBD,Yes,Yes,Yes,Yes,36.112462,-115.1707075,PDT (GMT-7),,
+,Drop Off Nanny and Papa,,Harry Reid International Airport,"Las Vegas, NV",,,,,,,,36.086905,-115.136464,,,
+"Sunday, May 5, 2024",Jersey Boys,,Orleans Showroom,"Las Vegas, NV",,,,,,,,36.1022222,-115.2011111,,,
 "Friday, May 24, 2024",Diversion,210,Ogden AirBnB,"Ogden, UT",4300,3,n/a,Yes,Yes,Yes,Yes,41.2209588,-111.9739393,MDT (GMT-6),272 25th Street,
 "Saturday, June 15, 2024",Diversion,27,Tonya to Dance Camp,"Bozeman, MT",4473,0,n/a,Yes,Yes,Yes,Yes,45.7784043,-111.1612273,MDT (GMT-6),,Bozeman airport
 "Friday, June 21, 2024",Diversion,90,Tonya Returns!,"Calgary, AB",3428,0,n/a,Yes,Yes,Yes,Yes,51.1325928,-114.0138904,MDT (GMT-6),,Calgary airport
-
   `.split('\n').filter(s => s.trim() !== '');
   const tripDataHeaders = tripDataRaw[0].split(',').map(s => s.trim());
   tripDataRaw = tripDataRaw.slice(1);
