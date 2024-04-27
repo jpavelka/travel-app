@@ -180,7 +180,7 @@ const getTripData = () => {
     leaveDate.setDate(leaveDate.getDate() + d.nights);
     d.leaveDate = leaveDate;
     while (campgroundInd < tripData.tripData.length - 1) {
-      if (leaveDate > new Date(tripData.tripData[campgroundInd].date)) {
+      if (leaveDate >= new Date(tripData.tripData[campgroundInd].date)) {
         campgroundInd += 1;
       } else {
         break;
