@@ -43,16 +43,12 @@ const getTripData = () => {
 ,Waltz Class/Social,,Jazzercise Flagstaff,"Flagstaff, AZ",,,,,,,,35.1970507,-111.6246951,,,
 ,Homolovi II Archaeological Site,,,,,,,,,,,35.0848197,-110.6427383,,,
 ,Walnut Canyon National Monument,,,,,,,,,,,35.1690189,-111.5043369,,,
-,Neighborhood by the Grocery Store,,,"Flagstaff, AZ",,,,,,,,35.2063939,-111.645072,,,
-,Neighborhood by park and library,,,"Flagstaff, AZ",,,,,,,,35.20050483,-111.6517823,,,
-,Thorpe Park,,,"Flagstaff, AZ",,,,,,,,35.2025426,-111.6584073,,,
 ,Arthur's house,,,"Flagstaff, AZ",,,,,,,,35.20500687,-111.6459523,,,
-,NAU,,,"Flagstaff, AZ",,,,,,,,35.19178655,-111.6522707,,,
-,In-n-Out,,,"Flagstaff, AZ",,,,,,,,35.1816287,-111.6609098,,,
 "Monday, April 22, 2024",Driving,148,Grand Canyon Trailer Village,"Grand Canyon, AZ",7021,3,TBD,50A,Yes,Yes,Yes,36.0528892,-112.1150912,MST (GMT-7),,
 ,Grand Canyon National Park,,,,,,,,,,,36.2678855,-112.3535253,,,
-"Thursday, April 25, 2024",Driving,57,Navajo Land Hotel,"Tuba City, AZ",4941,2,TBD,50A,Yes,No,No,36.1306034,-111.2420668,MDT (GMT-6),NavajoLand Tuba City R.V. Park,
-,Monument Valley,,,,,,,,,,,36.9913715,-110.1938672,,,
+"Thursday, April 25, 2024",Driving,57,NavajoLand Hotel,"Tuba City, AZ",4941,2,TBD,50A,Yes,No,No,36.1306034,-111.2420668,MDT (GMT-6),NavajoLand Tuba City R.V. Park,
+,Monument Valley Tour,,,,,,,,,,,36.9813728,-110.1123657,,,
+,Navajo Code Talkers Museum,,,"Tuba City, AZ",,,,,,,,36.1302507,-111.2405677,,,
 "Saturday, April 27, 2024",Driving,82,Waheap RV Park Lower CG,"Page, AZ",3732,3,TBD,50A,Yes,Yes,Yes,36.997326,-111.4990853,MST (GMT-7),,
 ,Upper Antelope Canyon,,,,,,,,,,,36.8619103,-111.3743302,,,
 ,Lower Antelope Canyon,,,,,,,,,,,36.9031279,-111.4132505,,,
@@ -68,7 +64,7 @@ const getTripData = () => {
 "Tuesday, June 18, 2024",Driving,115,Tunnel Mountain Trailer Court,"Banff, AB",4717,10,343/236/143,50A,Yes,???,Yes,51.190485,-115.5344935,MDT (GMT-6),,
 "Friday, June 28, 2024",Driving,41,Lake Louise Tent Trailer CG,"Lake Louise, AB",5118,4,132,30A,No,No,Yes,51.4176144,-116.1734193,MDT (GMT-6),soft sided,
 "Tuesday, July 02, 2024",Driving,144,Whistler's Campground,"Jasper, AB",3461,4,51O/51N/51D,50A,Yes,No,Yes,52.8504957,-118.0774499,MDT (GMT-6),,
-"Saturday, July 06, 2024",Driving,257,Hawk Tail Brewery,"Rimbey, AB",3051,1,n/a,No,No,No,No,52.6522102,-114.2424545,MDT (GMT-6),,
+"Saturday, July 06, 2024",Driving,249,Lakeview Aspen Beach PP,"Gull Lake, AB",2968,1,C-112,50A,DS,Yes,Yes,52.4622695,-113.9772208,MDT (GMT-6),,
 "Sunday, July 07, 2024",Driving,255,Lethbridge KOA,"Lethbridge, AB",2715,1,TBD,50A,Yes,Yes,Yes,49.711501,-112.872927,MDT (GMT-6),,
 "Monday, July 08, 2024",Driving,191,Big Sky Deli and Bakery,"Vaughn, MT",3500,1,n/a,No,No,No,No,47.5536727,-111.5612945,MDT (GMT-6),,
 "Tuesday, July 09, 2024",Driving,287,7th Ranch RV Camp,"Garryowen, MT",3198,1,TBD,50A,Yes,No,No,45.4919436,-107.3776587,MDT (GMT-6),,
@@ -90,6 +86,7 @@ const getTripData = () => {
 "Friday, May 24, 2024",Diversion,210,Ogden AirBnB,"Ogden, UT",4300,3,n/a,Yes,Yes,Yes,Yes,41.2209588,-111.9739393,MDT (GMT-6),272 25th Street,
 "Saturday, June 15, 2024",Diversion,27,Tonya to Dance Camp,"Bozeman, MT",4473,0,n/a,Yes,Yes,Yes,Yes,45.7784043,-111.1612273,MDT (GMT-6),,Bozeman airport
 "Friday, June 21, 2024",Diversion,90,Tonya Returns!,"Calgary, AB",3428,0,n/a,Yes,Yes,Yes,Yes,51.1325928,-114.0138904,MDT (GMT-6),,Calgary airport
+
   `.split('\n').filter(s => s.trim() !== '');
   const tripDataHeaders = tripDataRaw[0].split(',').map(s => s.trim());
   tripDataRaw = tripDataRaw.slice(1);
