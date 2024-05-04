@@ -64,45 +64,60 @@ const getIcons = (L) => {
     green: greenIcon,
     redSmall: redIconSmall,
     invisible: invisibleIcon
-}
+  }
 }
 
-const quickDateFormat = (d) => {
-  return d.toDateString();
-};
-
-const addMarkerToMap = (L, map, d, i, color, currentPoints) => {
+const addMarkerToMap = ({L, map, d, color, popupText = undefined,  maxZoom = undefined}) => {
     const icons = getIcons(L);
-    const today = new Date(new Date().toDateString());
 
     const opts = { icon: icons[color] };
     const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
-        
-    txtMrk.bindTooltip(
-      d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
-      { permanent: true, className: "date-label", offset: [1, 0] },
-    );
-    txtMrk.addTo(map);
+    
+    if (!!d.date && `${d.date}` !== 'Invalid Date') {
+      txtMrk.bindTooltip(
+        d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
+        { permanent: true, className: "date-label", offset: [1, 0] },
+      );
+      txtMrk.addTo(map);
+    }
     const mrk = L.marker([d.lat, d.lng], opts);
-    mrk.bindPopup(
-      [
-        `<b>${d.campground}</b>`,
-        `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
-        `${d.city} (${d.elevation} ft)`,
-        `Time zone: ${d.timezone}`,
-        `Site: ${d.site}`,
-        `Electric: ${d.electric}`,
-        `Sewer: ${d.sewer}`,
-        `Laundry: ${d.laundry}`,
-        `Showers: ${d.showers}`,
-        `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
-      ].join("<br>"),
-    );
+    if (!!popupText) {
+      mrk.bindPopup(popupText);
+    }
     mrk.addTo(map);
-    if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
-      currentPoints.push(L.marker([d.lat - 3.6, d.lng]));
-      currentPoints.push(L.marker([d.lat + 1.5, d.lng]));
+
+    if (!!maxZoom) {
+      map.on('zoomend', function() {
+        var currentZoom = map.getZoom();
+        if (currentZoom < maxZoom) {
+          mrk.setIcon(icons['invisible'])
+        } else {
+          mrk.setIcon(icons[color])
+        }
+      })
     }
 }
 
-export { addMarkerToMap }
+const addLineToMap = ({L, map, fromD, toD, lineColor, popupText = undefined}) => {
+  const line = L.polyline(
+    [
+      [fromD.lat, fromD.lng],
+      [toD.lat, toD.lng],
+    ],
+    { color: lineColor, weight: 8 },
+  );
+  line.addTo(map);
+  if (!!popupText) {
+    const clickLine = L.polyline(
+      [
+        [fromD.lat, fromD.lng],
+        [toD.lat, toD.lng],
+      ],
+      { opacity: 0, weight: 30 },
+    );
+    clickLine.bindPopup(popupText);
+    clickLine.addTo(map);
+  }
+}
+
+export { addMarkerToMap, addLineToMap }
