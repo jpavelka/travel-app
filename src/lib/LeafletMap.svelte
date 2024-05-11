@@ -45,7 +45,7 @@
           `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
           `${d.city} (${d.elevation} ft)`,
           `Time zone: ${d.timezone}`,
-          `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
+          `<a style="cursor:pointer" id="linkToPlaces${d.allPlacesInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.allPlacesInd}').click()">More info</a>`,
         ].join("<br>")
         addMarkerToMap({L: L, map: map, d: d, color: iconColor, popupText: popupText});
         if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
@@ -86,7 +86,7 @@
           `${quickDateFormat(d.date)} (${d.nights} night${d.nights === 1 ? "" : "s"})`,
           `${d.city} (${d.elevation} ft)`,
           `Time zone: ${d.timezone}`,
-          // `<a style="cursor:pointer" id="linkToPlaces${d.dataInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.dataInd}').click()">More info</a>`,
+          `<a style="cursor:pointer" id="linkToPlaces${d.allPlacesInd}" onClick="document.getElementById('moreInfoHiddenDiv${d.allPlacesInd}').click()">More info</a>`,
         ].join("<br>")
         addMarkerToMap({L: L, map: map, d: d, color: iconColor, popupText: popupText})
         if (Math.abs(d.date - today) < 10 * 24 * 60 * 60 * 1000) {
@@ -165,9 +165,16 @@
   >
   {#each $tripData as d}
     <div
-      id={`moreInfoHiddenDiv${d.dataInd}`}
+      id={`moreInfoHiddenDiv${d.allPlacesInd}`}
       style="display:none"
-      on:click={() => moreInfoFunc(d.dataInd)}
+      on:click={() => moreInfoFunc(d.allPlacesInd)}
+    ></div>
+  {/each}
+  {#each $diversionData as d}
+    <div
+      id={`moreInfoHiddenDiv${d.allPlacesInd}`}
+      style="display:none"
+      on:click={() => moreInfoFunc(d.allPlacesInd)}
     ></div>
   {/each}
 </main>
