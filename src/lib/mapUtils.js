@@ -67,13 +67,13 @@ const getIcons = (L) => {
   }
 }
 
-const addMarkerToMap = ({L, map, d, color, popupText = undefined,  maxZoom = undefined}) => {
+const addMarkerToMap = ({L, map, d, color, popupText = undefined,  maxZoom = undefined, dateLabel = true}) => {
     const icons = getIcons(L);
 
     const opts = { icon: icons[color] };
     const txtMrk = L.marker([d.lat, d.lng], { opacity: 0 });
     
-    if (!!d.date && `${d.date}` !== 'Invalid Date') {
+    if (dateLabel && !!d.date && `${d.date}` !== 'Invalid Date') {
       txtMrk.bindTooltip(
         d.date.toLocaleDateString().split("/").slice(0, 2).join("/"),
         { permanent: true, className: "date-label", offset: [1, 0] },
