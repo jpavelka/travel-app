@@ -101,6 +101,8 @@ const getTripData = () => {
 ,Drop Off Nanny and Papa,,Harry Reid International Airport,"Las Vegas, NV",,,,,,,,36.086905,-115.136464,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Sunday, May 5, 2024",Jersey Boys,,Orleans Showroom,"Las Vegas, NV",,,,,,,,36.1022222,-115.2011111,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, May 24, 2024",Diversion,210,Ogden AirBnB,"Ogden, UT",4300,3,n/a,Yes,Yes,Yes,Yes,41.2209588,-111.9739393,MDT (GMT-6),272 25th Street,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Good place to live?,,"Park, library, Rancho Market nearby","Ogden, UT",,,,,,,,41.21936826,-111.9565973,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Sugar House Park,,,"Salt Lake City, UT",,,,,,,,40.723877,-111.8493998,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Saturday, June 15, 2024",Diversion,27,Tonya to Dance Camp,"Bozeman, MT",4473,0,n/a,Yes,Yes,Yes,Yes,45.7784043,-111.1612273,MDT (GMT-6),,Bozeman airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, June 21, 2024",Diversion,90,Tonya Returns!,"Calgary, AB",3428,0,n/a,Yes,Yes,Yes,Yes,51.1325928,-114.0138904,MDT (GMT-6),,Calgary airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   `.split('\n').filter(s => s.trim() !== '');
