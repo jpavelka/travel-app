@@ -136,7 +136,6 @@
   </span>
 </div>
 
-
 <div style="display: flex">
   <div
     class={"tab " +
@@ -228,13 +227,7 @@
     {/if}
   </div>
 {:else}
-  {#if images.length > 0}
-    <div style='margin-top:1rem;overflow-y:scroll;height:450px;'>
-      <PlaceImages images={images}/>
-    </div>
-  {:else}
-    <div>No images</div>
-  {/if}
+  <PlaceImages images={images}/>
 {/if}
 
 

@@ -1,6 +1,7 @@
 <script>
   export let images;
   let imagesByLoc
+  
   $: {
     imagesByLoc = [];
     for (const img of images) {
@@ -15,21 +16,29 @@
   }
 </script>
 
-<div class=container>
-  {#each imagesByLoc as loc}
-    <div class=loc>{loc.loc}</div>
-    {#each loc.images as img}
-      <div class=locImgContainer>
-        <img style='max-height:350px;max-width:100%' src={img.src} />
-        <div class=caption>{img.caption}</div>
-      </div>
-      {/each}
-  {/each}
+<div class=container id=placeImgsContainer>
+  {#if images.length > 0}
+    {#each imagesByLoc as loc}
+      <div class=loc>{loc.loc}</div>
+      {#each loc.images as img}
+        <div class=locImgContainer>
+          <a href={img.src} target="_blank" rel="noopener noreferrer">
+            <img style='max-height:350px;max-width:100%' src={img.src} />
+          </a>
+          <div class=caption>{img.caption}</div>
+        </div>
+        {/each}
+    {/each}
+  {:else}
+    <div>No images</div>
+  {/if}
 </div>
 
 <style>
   .container {
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    overflow-y: scroll;
+    height: 450px;
   }
   .loc {
     font-size: 1.4rem;

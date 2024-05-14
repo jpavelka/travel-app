@@ -27,6 +27,11 @@ const placesMapType = writable("poi");
 
 placesInd.subscribe(() => {
   placesMapType.update(() => "poi");
+  try {
+    const placesImgEl = document.getElementById('placeImgsContainer');
+    placesImgEl.scrollTop = 0;
+    placesImgEl.style.height = `${Math.ceil(window.innerHeight - placesImgEl.getBoundingClientRect().top - window.scrollY)}px`;
+  } catch {}
 })
 
 const mapShown = writable(whichToShowInit === "map");
