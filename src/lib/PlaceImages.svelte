@@ -1,6 +1,14 @@
 <script>
+  import { afterUpdate } from 'svelte';
+  
   export let images;
   let imagesByLoc
+  let imgContainer;
+  let imgOffset;
+
+  afterUpdate(() => {
+    imgOffset = imgContainer.offsetTop;
+  });
   
   $: {
     imagesByLoc = [];
@@ -14,9 +22,12 @@
       imagesByLoc[imagesByLoc.length - 1].images.push(img)
     }
   }
+  $: innerHeight = 0
 </script>
 
-<div class=container id=placeImgsContainer>
+<svelte:window bind:innerHeight />
+
+<div class=container id=placeImgsContainer bind:this={imgContainer} style={`height:${innerHeight - parseInt(imgOffset)}px`}>
   {#if images.length > 0}
     {#each imagesByLoc as loc}
       <div class=loc>{loc.loc}</div>

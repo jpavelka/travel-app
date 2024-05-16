@@ -64,8 +64,6 @@ const getTripData = () => {
 "Tuesday, May 14, 2024",Driving,256,Moab KOA,"Moab, UT",4607,7,TBD,50A,Yes,Yes,Yes,38.523874,-109.4963551,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Arches National Park,,,,,,,,,,,38.733081,-109.5925139,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Canyonlands National Park,,,,,,,,,,,38.2135733,-109.9025345,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Goblin Valley State Park,,,,,,,,,,,38.573697,-110.707109,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Fiery Furnace Hike,,,,,,,,,,,38.7435404,-109.5615864,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Tuesday, May 21, 2024",Driving,223,Vernal KOA,"Vernal, UT",5318,3,TBD,50A,Yes,Yes,Yes,40.4694307,-109.5285888,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Dinosaur National Monument,,,,,,,,,,,40.5130533,-108.9487453,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, May 24, 2024",Driving,311,Gros Ventre CG,Grand Teton NP,6568,7,99,No,No,No,No,43.6159427,-110.6658657,MDT (GMT-6),gros ventre campground,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
