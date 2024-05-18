@@ -64,6 +64,7 @@ const getTripData = () => {
 "Tuesday, May 14, 2024",Driving,256,Moab KOA,"Moab, UT",4607,7,TBD,50A,Yes,Yes,Yes,38.523874,-109.4963551,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Arches National Park,,,,,,,,,,,38.733081,-109.5925139,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Canyonlands National Park,,,,,,,,,,,38.2135733,-109.9025345,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Colorado National Monument,,Visitor's Center,"Grand Junction, CO",,,,,,,,39.1009158,-108.7345048,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Tuesday, May 21, 2024",Driving,223,Vernal KOA,"Vernal, UT",5318,3,TBD,50A,Yes,Yes,Yes,40.4694307,-109.5285888,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Dinosaur National Monument,,,,,,,,,,,40.5130533,-108.9487453,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, May 24, 2024",Driving,311,Gros Ventre CG,Grand Teton NP,6568,7,99,No,No,No,No,43.6159427,-110.6658657,MDT (GMT-6),gros ventre campground,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -102,8 +103,11 @@ const getTripData = () => {
 ,Good place to live?,,"Park, library, Rancho Market nearby","Ogden, UT",,,,,,,,41.21936826,-111.9565973,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Good place to live?,,,"Bountiful, UT",,,,,,,,40.88625432,-111.8784417,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Sugar House Park,,,"Salt Lake City, UT",,,,,,,,40.723877,-111.8493998,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Golden Spike National Historical Park,,,,,,,,,,,41.6171911,-112.5507226,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Saturday, June 15, 2024",Diversion,27,Tonya to Dance Camp,"Bozeman, MT",4473,0,n/a,Yes,Yes,Yes,Yes,45.7784043,-111.1612273,MDT (GMT-6),,Bozeman airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, June 21, 2024",Diversion,90,Tonya Returns!,"Calgary, AB",3428,0,n/a,Yes,Yes,Yes,Yes,51.1325928,-114.0138904,MDT (GMT-6),,Calgary airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"Friday, July 5, 2024",Diversion,226,Edmonton AirBnB,"Edmonton, AB",2116,2,n/a,Yes,Yes,Yes,Yes,53.5343546,-113.5794589,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,West Edmonton Mall,,,"Edmonton, AB",,,,,,,,53.5230471,-113.6227415,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   `.split('\n').filter(s => s.trim() !== '');
   const tripDataHeaders = tripDataRaw[0].split(',').map(s => s.trim());
   tripDataRaw = tripDataRaw.slice(1);
