@@ -16,6 +16,7 @@
   };
   $: placeData = $allPlacesData[$placesInd];
   const getDataMapStr = (d, latLngOnly) => {
+    console.log(d, $placesMapType)
     let s;
     if (latLngOnly) {
       s = d.lat + "," + d.lng;
@@ -29,7 +30,9 @@
       ? getDataMapStr(placeData, false)
       : $placesMapType === "fromLast"
         ? `&origin=${getDataMapStr($tripData[placeData.fromCampgroundInd], true)}&destination=${getDataMapStr(placeData, true)}`
-        : `&origin=${getDataMapStr(placeData, true)}&destination=${getDataMapStr($tripData[placeData.toCampgroundInd], true)}`;
+        : $placesMapType === "toNext"
+          ? `&origin=${getDataMapStr(placeData, true)}&destination=${getDataMapStr($tripData[placeData.toCampgroundInd], true)}`
+          : '';
   $: dt = dayjs(placeData.date);
   const dtFrmt = "ddd MMM D";
   $: utilsStr = {};
