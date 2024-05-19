@@ -73,7 +73,7 @@ const getTripData = () => {
 "Friday, May 31, 2024",Driving,98,Fishing Bridge RV,Yellowstone NP,7770,14,TBD,50A,Yes,Yes,Yes,44.5657137,-110.3660453,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Yellowstone National Park,,,,,,,,,,,44.427963,-110.588455,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, June 14, 2024",Driving,162,Bridger Brewing,"Three Forks, MT",4075,1,n/a,No,No,No,No,45.9202897,-111.5901746,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-"Saturday, June 15, 2024",Driving,239,Lewis & Clark RV Park,"Shelby, MT",3314,1,TBD,50A,Yes,Yes,Yes,48.5240978,-111.8591962,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"Saturday, June 15, 2024",Driving,239,Lewis & Clark RV Park,"Shelby, MT",3314,1,TBD,50A,Yes,Yes,Yes,48.5240978,-111.8591962,MDT (GMT-6),Lewis & Clark RV Park LLC,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Sunday, June 16, 2024",Driving,195,George Lane Memorial Park,"High River, AB",3402,2,TBD,30A,No,No,Yes,50.5784315,-113.8751605,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Tuesday, June 18, 2024",Driving,115,Tunnel Mountain Trailer Court,"Banff, AB",4717,10,343/236/143,50A,Yes,???,Yes,51.190485,-115.5344935,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Banff National Park,,,,,,,,,,,51.1779942,-115.5702528,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
