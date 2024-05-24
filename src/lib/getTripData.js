@@ -112,6 +112,8 @@ const getTripData = () => {
 ,Good place to live?,,,"Bountiful, UT",,,,,,,,40.88625432,-111.8784417,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Sugar House Park,,,"Salt Lake City, UT",,,,,,,,40.723877,-111.8493998,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Golden Spike National Historical Park,,,,,,,,,,,41.6171911,-112.5507226,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Loveland Living Planet Aquarium,,,"Draper, UT",,,,,,,,40.5320877,-111.8938258,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Milonga ,,E. W. Garbett Center for Choral Studies,"Salt Lake City, UT",,,,,,,,40.7845429,-111.8964608,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Saturday, June 15, 2024",Diversion,27,Tonya to Dance Camp,"Bozeman, MT",4473,0,n/a,Yes,Yes,Yes,Yes,45.7784043,-111.1612273,MDT (GMT-6),,Bozeman airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, June 21, 2024",Diversion,90,Tonya Returns!,"Calgary, AB",3428,0,n/a,Yes,Yes,Yes,Yes,51.1325928,-114.0138904,MDT (GMT-6),,Calgary airport,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "Friday, July 5, 2024",Diversion,226,Edmonton AirBnB,"Edmonton, AB",2116,2,n/a,Yes,Yes,Yes,Yes,53.5343546,-113.5794589,MDT (GMT-6),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
