@@ -90,7 +90,7 @@ const getTripData = () => {
 ,Lake Louise,,,,,,,,,,,51.4124354,-116.2273869,,,
 ,Moraine Lake,,,,,,,,,,,51.3217416,-116.1860049,,,
 ,Peyto Lake,,,,,,,,,,,51.7255153,-116.5226977,,,
-"Tuesday, July 02, 2024",Driving,144,Whistler's Campground,"Jasper, AB",3461,4,51O/51N/51D,50A,Yes,No,Yes,52.8504957,-118.0774499,MDT (GMT-6),,
+"Tuesday, July 02, 2024",Driving,144,Whistler's Campground,"Jasper, AB",3461,3,51O/51N/51D,50A,Yes,No,Yes,52.8504957,-118.0774499,MDT (GMT-6),,
 ,Maligne Canyon,,,,,,,,,,,52.9201888,-117.9984631,,,
 ,Icefields Parkway,,,,,,,,,,,52.2203483,-117.2242371,,,
 ,Beauty Creek,,,,,,,,,,,52.3332473,-117.3199854,,,
