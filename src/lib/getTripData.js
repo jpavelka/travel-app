@@ -260,6 +260,10 @@ const getTripData = () => {
     tripData.tripData[iInt].dataInd = iInt;
     tripData.tripData[iInt].fromCampgroundInd = iInt - 1;
     tripData.tripData[iInt].toCampgroundInd = iInt + 1;
+    const d = tripData.tripData[iInt];
+    let leaveDate = new Date(d.date);
+    leaveDate.setDate(leaveDate.getDate() + d.nights);
+    tripData.tripData[iInt].leaveDate = leaveDate;
   }
   
   const allPlacesData = tripData.tripData.concat(tripData.diversions).sort((a, b) => {
@@ -294,14 +298,20 @@ const getDateData = (d) => {
       currentInd += 1;
     }
   }
+  let retData = [];
   if (
     currentInd > 0 &&
     get(tripData)[currentInd].date.toDateString() == dt.toDateString()
   ) {
-    return [get(tripData)[currentInd - 1], get(tripData)[currentInd]];
+    retData = [get(tripData)[currentInd - 1], get(tripData)[currentInd]];
   } else {
-    return [get(tripData)[currentInd]];
+    retData = [get(tripData)[currentInd]];
   }
+  retData = retData.filter(rd => {
+    const ld = rd.leaveDate;
+    return (dt.getTime() - 86400000) < ld.getTime()
+  })
+  return retData
 };
 
 const tripWeatherData = writable([]);

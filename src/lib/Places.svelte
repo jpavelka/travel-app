@@ -16,7 +16,6 @@
   };
   $: placeData = $allPlacesData[$placesInd];
   const getDataMapStr = (d, latLngOnly) => {
-    console.log(d, $placesMapType)
     let s;
     if (latLngOnly) {
       s = d.lat + "," + d.lng;
