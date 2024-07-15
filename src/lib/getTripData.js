@@ -98,6 +98,7 @@ const getTripData = () => {
 "Saturday, July 06, 2024",Driving,255,Lethbridge KOA (2),"Lethbridge, AB",2715,2,TBD,50A,Yes,Yes,Yes,49.711501,-112.872927,MDT (GMT-6),,
 "Monday, July 08, 2024",Driving,191,Great Falls KOA Holiday,"Great Falls, MT",3500,1,TBD,50A,Yes,Yes,Yes,47.4875491,-111.2216082,MDT (GMT-6),,
 "Tuesday, July 09, 2024",Driving,287,7th Ranch RV Camp,"Garryowen, MT",3198,1,TBD,50A,Yes,No,No,45.4919436,-107.3776587,MDT (GMT-6),,
+,Little Bighorn Battlefield National Monument,,,,,,,,,,,45.5703673,-107.4273966,,,
 "Wednesday, July 10, 2024",Driving,215,Devils Tower / Black Hills KOA Journey,"Devils Tower, WY",3861,2,TBD,50A,Yes,Yes,Yes,44.5902221,-104.6985666,MDT (GMT-6),,
 ,Devils Tower National Monument,,,,,,,,,,,44.5902098,-104.7146168,,,
 "Friday, July 12, 2024",Driving,103,Buffalo Ridge Camp Resort,"Custer, SD",5312,6,TBD,50A,Yes,Yes,Yes,43.7584652,-103.6128112,MDT (GMT-6),,
