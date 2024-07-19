@@ -106,7 +106,7 @@ const getTripData = () => {
 ,Crazy Horse Memorial,,,,,,,,,,,43.8366191,-103.6234038,,,
 ,Badlands National Park,,,,,,,,,,,43.8553804,-102.3396912,,,
 ,Mount Rushmore,,,,,,,,,,,43.8803357,-103.4537746,,,
-"Thursday, July 18, 2024",Driving,261,KOA Journey Ogallala,"Ogallala, NE",3245,1,TBD,Yes,Yes,Yes,Yes,41.113,-101.7086111,MDT (GMT-6),,
+"Thursday, July 18, 2024",Driving,261,Ogallala / Tri Trails KOA Journey,"Ogallala, NE",3245,1,TBD,Yes,Yes,Yes,Yes,41.1053163,-101.7142801,MDT (GMT-6),,
 "Saturday, April 06, 2024",Diversion,162,Inn at the Park,"San Diego, CA",62,4,TBD,Yes,Yes,Yes,Yes,32.7385226,-117.1597926,PDT (GMT-7),,
 ,Maple Canyon,,,"San Diego, CA",,,,,,,,32.7349759,-117.1638457,,,
 ,San Diego Zoo,,,"San Diego, CA",,,,,,,,32.7360353,-117.1509849,,,
