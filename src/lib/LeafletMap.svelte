@@ -6,7 +6,7 @@
   import { addMarkerToMap, addLineToMap } from '$lib/mapUtils.js';
 
   const dateData = getDateData(new Date());
-  const currentInd = dateData[0].dataInd;
+  const currentInd = dateData.length > 0 ? dateData[0].dataInd : -1;
   const today = new Date(new Date().toDateString());
   let mapElement;
   let map;

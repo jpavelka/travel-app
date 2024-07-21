@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import { browser } from "$app/environment";
-import { getDateData } from "$lib/getTripData";
+import { getDateData, tripData } from "$lib/getTripData";
 
 let whichToShowInit = "map";
 if (browser) {
@@ -22,7 +22,7 @@ const placesTab = writable(placesTabInit);
 
 const dateData = getDateData(new Date());
 const dayInd = Math.floor(new Date().getHours() / 24 * dateData.length);
-const placesInd = writable(dateData[dayInd].allPlacesInd);
+const placesInd = writable(dateData.length > 0 ? dateData[dayInd].allPlacesInd : 0);
 const placesMapType = writable("poi");
 
 placesInd.subscribe(() => {
